@@ -1,5 +1,3 @@
-import { CiLight } from "react-icons/ci";
-import { IoMoonOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import UserInfo from "../UserInfo/UserInfo";
@@ -33,9 +31,7 @@ const Navbar = () => {
       <div className="flex-1 lg:flex-none">
         <h1 className="text-xl md:text-[2rem] font-bold  select-none font-lexend">
           <NavLink to={"/"}>
-            <span className="text-4xl">
-              Share and Savor
-            </span>
+            <span className="text-4xl">Share and Savor</span>
           </NavLink>
         </h1>
       </div>
