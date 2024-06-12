@@ -28,12 +28,16 @@ const Navbar = () => {
     <div
       className={`w-full z-50 p-2 lg:py-4 lg:px-8  flex items-center justify-between shadow-lg fixed`}
     >
-      <div className="flex-1 lg:flex-none">
-        <h1 className="text-xl md:text-[2rem] font-bold  select-none font-lexend">
-          <NavLink to={"/"}>
-            <span className="text-4xl">Share and Savor</span>
-          </NavLink>
-        </h1>
+      <div className="flex flex-row-reverse items-center lg:flex-none">
+        <div>
+          <h1 className="text-xl md:text-[2rem] font-bold  select-none font-lexend">
+            <NavLink to={"/"}>
+              <span className="text-4xl">Buzz Forum</span>
+            </NavLink>
+          </h1>
+        </div>
+        {/* mobile and tab */}
+        <NavbarSmDevice routes={routes} navStyle={navStyle} />
       </div>
 
       <div
@@ -59,23 +63,13 @@ const Navbar = () => {
         })}
       </div>
 
-      {user ? (
-        <div className="lg:flex gap-2 hidden lg:static">
-          <UserInfo />
-        </div>
+      {!user ? (
+        <UserInfo />
       ) : (
-        <div className={`lg:flex gap-2 hidden lg:static`}>
-          <div className="px-5 py-2 bg-green-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
-            <NavLink to={"/login"}>Log In</NavLink>
-          </div>
-          <div className="px-5 py-2 bg-[#306844] text-white rounded hover:bg-opacity-70 hover:scale-105">
-            <NavLink to={"/register"}>Register</NavLink>
-          </div>
+        <div className="px-5 py-2 bg-green-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
+          <NavLink to={"/join-us"}>Join us</NavLink>
         </div>
       )}
-
-      {/* mobile and tab */}
-      <NavbarSmDevice routes={routes} navStyle={navStyle} />
     </div>
   );
 };

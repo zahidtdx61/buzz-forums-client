@@ -1,13 +1,12 @@
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Tooltip } from "react-tooltip";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UserInfo = () => {
   const { user, logOut } = useAuth();
-  const { displayName, photoURL } = user || {};
+  const { photoURL } = user || {};
   const axiosSecure = useAxiosSecure();
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -34,14 +33,9 @@ const UserInfo = () => {
   return (
     <>
       <div className="flex items-center justify-end gap-3">
-        <button
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content={displayName || "Not available"}
-          onClick={handleOpenUserMenu}
-        >
+        <button onClick={handleOpenUserMenu}>
           <Avatar src={photoURL} />
         </button>
-        <Tooltip id="my-tooltip" />
 
         <Menu
           sx={{ mt: "45px" }}
