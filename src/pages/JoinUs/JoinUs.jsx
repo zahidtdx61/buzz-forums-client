@@ -47,7 +47,7 @@ const JoinUs = () => {
           </button>
         </div>
 
-        <div>{tab === 0 ? <Login /> : <Register />}</div>
+        <div>{tab === 0 ? <Login tabIndex={tabIndex} /> : <Register />}</div>
       </div>
     </section>
   );

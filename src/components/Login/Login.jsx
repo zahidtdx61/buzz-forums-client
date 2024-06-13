@@ -5,8 +5,9 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({tabIndex}) => {
   const { register, handleSubmit } = useForm();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
@@ -286,12 +287,12 @@ const Login = () => {
 
           <p className="text-center">
             Don&apos;t have an account?{" "}
-            <Link
-              to={"/register"}
+            <button
+              onClick={() => tabIndex(1)}
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               Register
-            </Link>
+            </button>
           </p>
         </div>
         <div
@@ -302,5 +303,9 @@ const Login = () => {
     </>
   );
 };
+
+Login.propTypes = {
+  tabIndex: PropTypes.func,
+}
 
 export default Login;

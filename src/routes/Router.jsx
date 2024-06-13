@@ -18,6 +18,10 @@ const router = createBrowserRouter([
     path: "/join-us",
     element: <JoinUs />,
   },
+  {
+    path: "*",
+    element: <h1>404 Not Found</h1>,
+  },
 ]);
 
 export default router;
