@@ -13,7 +13,7 @@ const UserInfo = () => {
   const handleSignOut = async () => {
     try {
       await logOut();
-      await axiosSecure.get("sign-out");
+      await axiosSecure.get("/user/logout");
       console.log("Sign out successful");
     } catch (error) {
       console.log(error.message);

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { imageUpload } from "../../utils";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -24,7 +25,6 @@ const Register = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [nameError, setNameError] = useState(false);
-  const [photoUrlError, setPhotoUrlError] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,14 +44,13 @@ const Register = () => {
 
   const session = useAxiosSecure();
   const addUserToDatabase = async (user) => {
-    const { uid, email, displayName, photoURL } = user;
+    const { uid, email, displayName } = user;
     try {
       // console.log({ uid, email, displayName, photoURL, session });
-      await session.post("/add-user", {
-        uid: uid,
+      await session.post("/user/register", {
+        uid,
         email,
         name: displayName,
-        image: photoURL,
       });
       // console.log(response);
     } catch (error) {
@@ -68,12 +67,6 @@ const Register = () => {
     // name validation
     if (name.length === 0) {
       setNameError("This field is required");
-      return;
-    }
-
-    // photo url validation
-    if (image.length === 0) {
-      setPhotoUrlError("This field is required");
       return;
     }
 
@@ -105,14 +98,17 @@ const Register = () => {
       return;
     }
 
-    console.log(data);
-    return;
+    // console.log(data);
 
     try {
       const result = await signUpEmail(email, password);
       const { user } = result;
       console.log("Before Update", user);
 
+      // upload image
+      const photoUrl = await imageUpload(image[0]);
+
+      // update user
       await updateUser(name, photoUrl);
       setUser({ ...user, displayName: name, photoURL: photoUrl });
       setIsLoading(false);
@@ -168,7 +164,7 @@ const Register = () => {
   return (
     <>
       <Helmet>
-        <title>Share and Savor | Register</title>
+        <title>Buzz Forums | Register</title>
       </Helmet>
 
       <div className="w-full flex mb-4 relative min-h-[calc(100vh-116px)]">

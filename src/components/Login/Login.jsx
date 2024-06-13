@@ -26,13 +26,13 @@ const Login = () => {
   const session = useAxiosSecure();
   //  name, email, uid, image
   const addUserToDatabase = async (user) => {
-    const { uid, email, displayName, photoURL } = user;
+    const { uid, email, displayName } = user;
     try {
-      await session.post("/add-user", {
-        uid: uid,
+      // console.log({ uid, email, displayName, photoURL, session });
+      await session.post("/user/register", {
+        uid,
         email,
         name: displayName,
-        image: photoURL,
       });
       // console.log(response);
     } catch (error) {
@@ -92,7 +92,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Buzz Forum | Sign In</title>
+        <title>Buzz Forums | Sign In</title>
       </Helmet>
 
       <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-start mt-4 px-4">
