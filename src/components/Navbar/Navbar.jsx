@@ -63,7 +63,7 @@ const Navbar = () => {
         })}
       </div>
 
-      {!user ? (
+      {user ? (
         <UserInfo />
       ) : (
         <div className="px-5 py-2 bg-green-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
