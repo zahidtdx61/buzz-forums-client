@@ -2,9 +2,26 @@
 import { useState } from "react";
 import Register from "../../components/Register/Register";
 import Login from "../../components/Login/Login";
+import useAuth from "../../hooks/useAuth";
+import { Navigate, useNavigation } from "react-router-dom";
+import toast from "react-hot-toast";
+import Loader from "../../components/Loader/Loader";
 
 const JoinUs = () => {
   const [tab, tabIndex] = useState(0);
+  const {user} = useAuth();
+
+  const navigation = useNavigation();
+  const { isLoading } = useAuth();
+
+  if (navigation.state === "loading") return <Loader />;
+  if (isLoading) return <Loader />;
+
+  if (user) {
+    toast.error("You are already signed in");
+    return <Navigate to="/" />;
+  }
+
   return (
     <section className="flex flex-col items-center justify-center font-mulish">
       <div className="flex flex-col items-center justify-center w-full max-w-2xl p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">

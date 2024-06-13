@@ -1,3 +1,4 @@
+import { IoIosNotificationsOutline } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import UserInfo from "../UserInfo/UserInfo";
@@ -8,17 +9,17 @@ const Navbar = () => {
 
   const routes = [
     { name: "Home", path: "/", type: "public" },
-    { name: "Available Foods", path: "/available-foods", type: "public" },
-    { name: "Add Food", path: "/add-food", type: "private" },
+    { name: "Membership Page", path: "/membership", type: "public" },
+    { name: "Notifications", path: "/notification", type: "private" },
     { name: "My Foods", path: "/my-foods", type: "private-conditional" },
     { name: "My Requests", path: "/my-requests", type: "private-conditional" },
   ];
 
   const navStyle = (isActive) => {
     return [
-      isActive ? "text-green-300" : "text-green-700",
+      isActive ? "text-blue-300" : "text-blue-700",
       isActive
-        ? "border-[2px] border-green-300 rounded  px-2 font-semibold"
+        ? "border-[2px] border-blue-300 rounded  px-2 font-semibold"
         : "font-medium px-2 hover:opacity-75",
       "py-1",
     ].join(" ");
@@ -41,7 +42,7 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`gap-4 flex-1 font-bold lg:flex hidden lg:static justify-center`}
+        className={`gap-4 font-bold lg:flex hidden lg:static justify-center items-center`}
       >
         {routes.map((route, index) => {
           if (
@@ -55,7 +56,13 @@ const Navbar = () => {
                   to={route.path}
                   className={({ isActive }) => navStyle(isActive)}
                 >
-                  {route.name}
+                  {route.name === "Notifications" ? (
+                    <button>
+                      <IoIosNotificationsOutline className="text-2xl" />
+                    </button>
+                  ) : (
+                    route.name
+                  )}
                 </NavLink>
               </ul>
             );
@@ -66,7 +73,7 @@ const Navbar = () => {
       {user ? (
         <UserInfo />
       ) : (
-        <div className="px-5 py-2 bg-green-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
+        <div className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
           <NavLink to={"/join-us"}>Join us</NavLink>
         </div>
       )}

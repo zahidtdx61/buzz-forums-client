@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -14,14 +14,8 @@ const Login = () => {
   const location = useLocation();
   const prevPage = location?.state || "/";
 
-  const {
-    setUser,
-    setIsLoading,
-    signInEmail,
-    signInGoogle,
-    signInGithub,
-    user,
-  } = useAuth();
+  const { setUser, setIsLoading, signInEmail, signInGoogle, signInGithub } =
+    useAuth();
 
   const session = useAxiosSecure();
   //  name, email, uid, image
@@ -39,11 +33,6 @@ const Login = () => {
       console.log("Error: ", error);
     }
   };
-
-  if (user) {
-    toast.error("You are already signed in");
-    return <Navigate to="/" />;
-  }
 
   const handleSignIn = async (data) => {
     const { email, password } = data;

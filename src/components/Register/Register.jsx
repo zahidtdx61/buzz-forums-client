@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../utils";
@@ -17,7 +17,6 @@ const Register = () => {
     updateUser,
     signInGoogle,
     signInGithub,
-    user,
   } = useAuth();
 
   const [isPasswordHidden, setPasswordHidden] = useState(true);
@@ -27,8 +26,7 @@ const Register = () => {
   const [nameError, setNameError] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const prevPage = location?.state || "/";
+  const prevPage = "/";
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const isValidEmail = (email) => emailRegex.test(email);
@@ -156,11 +154,6 @@ const Register = () => {
     }
   };
 
-  if (user) {
-    toast.error("You are already signed in");
-    return <Navigate to="/" />;
-  }
-
   return (
     <>
       <Helmet>
@@ -175,15 +168,6 @@ const Register = () => {
                 <h3 className="text-blue-600 text-2xl font-bold sm:text-3xl">
                   Register
                 </h3>
-                <p className="">
-                  Already have an account?{" "}
-                  <Link
-                    to={"/login"}
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Log in
-                  </Link>
-                </p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-x-3 my-4">
