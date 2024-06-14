@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import DeletePostModal from "../../components/DeletePostModal/DeletePostModal";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
-  const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openComment, setOpenComment] = useState(false);
   const [postId, setPostId] = useState("");
 
   const { data, isLoading, isError, refetch } = useQuery({
@@ -57,6 +59,7 @@ const MyPosts = () => {
             {data.map((post) => (
               <tr key={post._id} className="border-b">
                 <td className="px-4 py-2">{post.title}</td>
+                
                 <td className="px-4 py-2 flex justify-center items-center">
                   <img
                     src={post.image}
@@ -64,7 +67,8 @@ const MyPosts = () => {
                     className="w-20 h-20 object-cover object-center"
                   />
                 </td>
-                <td className="px-4 py-2 ">
+
+                <td className="px-4 py-2">
                   <div className="flex gap-4 items-center justify-center">
                     <div className="flex items-center gap-1">
                       <span>{post.upVotes}</span>
@@ -77,17 +81,26 @@ const MyPosts = () => {
                   </div>
                 </td>
                 <td className="px-4 py-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded-md">
-                    Comment
+                  <button
+                    onClick={() => {
+                      setPostId(post._id);
+                      setOpenComment(true);
+                    }}
+                    className="bg-blue-500 text-white px-2 py-1 rounded-md w-fit mx-auto"
+                  >
+                    Comment{" "}
+                    <span className="text-blue-200">
+                      ({post.comments.length})
+                    </span>
                   </button>
                 </td>
                 <td className="px-4 py-2">
                   <button
                     onClick={() => {
                       setPostId(post._id);
-                      setOpen(true);
+                      setOpenDelete(true);
                     }}
-                    className="bg-red-500 text-white px-2 py-1 rounded-md"
+                    className="bg-red-500 text-white px-2 py-1 rounded-md w-fit mx-auto"
                   >
                     Delete
                   </button>
@@ -99,7 +112,20 @@ const MyPosts = () => {
       </table>
 
       {/* delete modal */}
-      <DeletePostModal open={open} setOpen={setOpen} postId={postId} refetch={refetch} />
+      <DeletePostModal
+        open={openDelete}
+        setOpen={setOpenDelete}
+        postId={postId}
+        refetch={refetch}
+      />
+
+      {/* add comment modal */}
+      <AddCommentModal
+        open={openComment}
+        setOpen={setOpenComment}
+        postId={postId}
+        refetch={refetch}
+      />
     </div>
   );
 };
