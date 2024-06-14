@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UserInfo = () => {
   const { user, logOut } = useAuth();
-  const { photoURL } = user || {};
+  const { photoURL, displayName } = user || {};
   const axiosSecure = useAxiosSecure();
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -28,7 +28,7 @@ const UserInfo = () => {
     setAnchorElUser(null);
   };
 
-  const settings = ["Profile", "Dashboard"];
+  const settings = ["Dashboard"];
 
   return (
     <>
@@ -53,6 +53,10 @@ const UserInfo = () => {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
+          <MenuItem key={"profile"}>
+            <Typography textAlign="center">{displayName}</Typography>
+          </MenuItem>
+
           {settings.map((setting) => (
             <MenuItem key={setting} onClick={handleCloseUserMenu}>
               <Link to={`/${setting.toLowerCase()}`}>
@@ -60,6 +64,7 @@ const UserInfo = () => {
               </Link>
             </MenuItem>
           ))}
+
           <MenuItem onClick={handleSignOut}>
             <Typography textAlign="center">Logout</Typography>
           </MenuItem>

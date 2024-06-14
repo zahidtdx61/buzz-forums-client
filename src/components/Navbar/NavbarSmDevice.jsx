@@ -2,6 +2,7 @@ import { Menu, MenuItem, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import { LuMenu } from "react-icons/lu";
 import { NavLink, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -58,7 +59,13 @@ const NavbarSmDevice = ({ routes, navStyle }) => {
                   to={route.path}
                   className={({ isActive }) => navStyle(isActive)}
                 >
-                  <Typography textAlign="center">{route.name}</Typography>
+                  {route.name === "Notifications" ? (
+                    <button>
+                      <IoIosNotificationsOutline className="text-2xl" />
+                    </button>
+                  ) : (
+                    <Typography>{route.name}</Typography>
+                  )}
                 </NavLink>
               </MenuItem>
             );

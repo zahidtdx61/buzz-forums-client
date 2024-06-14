@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
+import AddPost from "../pages/AddPost/AddPost";
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
+import MyPosts from "../pages/MyPosts/MyPosts";
+import MyProfile from "../pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Hi from pannel</h1>,
+        element: <MyProfile />,
+      },
+      {
+        path: "add-post",
+        element: <AddPost />,
+      },
+      {
+        path: "my-posts",
+        element: <MyPosts />,
       },
     ],
   },

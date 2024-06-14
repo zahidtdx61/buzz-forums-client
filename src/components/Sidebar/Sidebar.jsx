@@ -1,4 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { IoLogOutOutline } from "react-icons/io5";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Sidebar = () => {
   const routes = [
@@ -12,26 +15,42 @@ const Sidebar = () => {
     },
     {
       name: "My Posts",
-      path: "/dashboard/posts",
+      path: "/dashboard/my-posts",
     },
   ];
 
+  const axiosSecure = useAxiosSecure();
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
   const navStyle = (isActive) => {
     return [
-      isActive ? "text-blue-300" : "text-blue-700",
+      isActive ? "text-blue-500" : "text-blue-700",
       isActive
-        ? "border-[2px] border-blue-300 rounded  px-2 font-semibold"
+        ? "border-blue-300 rounded  px-2 font-semibold bg-gray-200"
         : "font-medium px-2 hover:opacity-75",
-      "py-1 hover:bg-gray-200 cursor-pointer",
+      "py-1 px-8 hover:bg-gray-200 cursor-pointer",
     ].join(" ");
   };
 
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      await axiosSecure.get("/user/logout");
+      console.log("Sign out successful");
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
-    <div className="w-full min-h-screen bg-gray-100">
+    <div className="w-full min-h-svh h-full bg-gray-100 flex flex-col">
       <div className="p-4 text-center">
-        <h1 className="text-2xl font-bold">Buzz Forums</h1>
+        <h1 className="text-4xl font-bold">Buzz Forums</h1>
       </div>
-      <div className="font-mulish font-medium flex flex-col mt-12">
+
+      <div className="font-mulish font-medium flex flex-col mt-12 flex-1">
         {routes.map((route) => (
           <NavLink
             key={route.path}
@@ -42,6 +61,22 @@ const Sidebar = () => {
             {route.name}
           </NavLink>
         ))}
+      </div>
+
+      <div className="mb-4">
+        <button
+          className="text-lg font-bold text-center text-zinc-500 flex gap-1 items-center w-full py-2 px-3 hover:bg-zinc-300 cursor-pointer"
+          onClick={handleSignOut}
+        >
+          <IoLogOutOutline size={20} />
+          <p>Logout</p>
+        </button>
+        <h1 className="text-lg font-bold px-3 text-gray-500 mt-4">
+          Contact us.
+        </h1>
+        <p className="text-center text-gray-400 px-2">
+          &copy; 2024 Buzz Forums. All rights reserved.
+        </p>
       </div>
     </div>
   );

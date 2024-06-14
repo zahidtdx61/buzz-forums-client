@@ -11,15 +11,13 @@ const Navbar = () => {
     { name: "Home", path: "/", type: "public" },
     { name: "Membership Page", path: "/membership", type: "public" },
     { name: "Notifications", path: "/notification", type: "private" },
-    { name: "My Foods", path: "/my-foods", type: "private-conditional" },
-    { name: "My Requests", path: "/my-requests", type: "private-conditional" },
   ];
 
   const navStyle = (isActive) => {
     return [
-      isActive ? "text-blue-300" : "text-blue-700",
+      isActive ? "text-blue-500" : "text-blue-800",
       isActive
-        ? "border-[2px] border-blue-300 rounded  px-2 font-semibold"
+        ? "border-b-[2px] border-blue-500 px-2 font-semibold"
         : "font-medium px-2 hover:opacity-75",
       "py-1",
     ].join(" ");
