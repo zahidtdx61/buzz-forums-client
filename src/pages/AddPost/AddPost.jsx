@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import usePostCounter from "../../hooks/usePostCounter";
 import { imageUpload } from "../../utils";
 
 const options = [
@@ -51,6 +52,9 @@ const AddPost = () => {
   const { register, handleSubmit } = useForm();
   const { user } = useAuth();
   const { photoURL, displayName, email } = user || {};
+  const postCount = usePostCounter();
+
+  console.log(postCount.length);
 
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -175,8 +179,9 @@ const AddPost = () => {
 
         <div>
           <button
+            disabled={postCount.length >= 5}
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:cursor-not-allowed"
           >
             Submit
           </button>
