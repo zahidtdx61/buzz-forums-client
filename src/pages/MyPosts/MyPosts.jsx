@@ -1,10 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import DeletePostModal from "../../components/DeletePostModal/DeletePostModal";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
+  const [open, setOpen] = useState(false);
+  const [postId, setPostId] = useState("");
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["my-posts"],
@@ -78,7 +82,13 @@ const MyPosts = () => {
                   </button>
                 </td>
                 <td className="px-4 py-2">
-                  <button className="bg-red-500 text-white px-2 py-1 rounded-md">
+                  <button
+                    onClick={() => {
+                      setPostId(post._id);
+                      setOpen(true);
+                    }}
+                    className="bg-red-500 text-white px-2 py-1 rounded-md"
+                  >
                     Delete
                   </button>
                 </td>
@@ -87,6 +97,9 @@ const MyPosts = () => {
           </tbody>
         )}
       </table>
+
+      {/* delete modal */}
+      <DeletePostModal open={open} setOpen={setOpen} postId={postId} refetch={refetch} />
     </div>
   );
 };
