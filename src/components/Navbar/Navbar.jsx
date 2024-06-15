@@ -71,9 +71,12 @@ const Navbar = () => {
       {user ? (
         <UserInfo />
       ) : (
-        <div className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
-          <NavLink to={"/join-us"}>Join us</NavLink>
-        </div>
+        <NavLink
+          to={"/join-us"}
+          className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-opacity-70 hover:scale-105"
+        >
+          Join us
+        </NavLink>
       )}
     </div>
   );

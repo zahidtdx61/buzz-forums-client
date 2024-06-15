@@ -3,7 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const usePostCounter = () => {
   const axiosSecure = useAxiosSecure();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["my-posts"],
     queryFn: async () => {
       const response = await axiosSecure.get("/user/get-posts");
@@ -12,7 +12,7 @@ const usePostCounter = () => {
     },
   });
 
-  return data || [];
+  return { posts: data, isLoading };
 };
 
 export default usePostCounter;

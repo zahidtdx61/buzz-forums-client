@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import LoadContent from "../../components/Loader/LoadContent";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import usePostCounter from "../../hooks/usePostCounter";
@@ -47,14 +48,13 @@ const options = [
 ];
 
 const AddPost = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [tagError, setTagError] = useState(false);
   const { register, handleSubmit } = useForm();
   const { user } = useAuth();
   const { photoURL, displayName, email } = user || {};
   const postCount = usePostCounter();
-
-  console.log(postCount.length);
 
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -66,16 +66,32 @@ const AddPost = () => {
       setTagError(true);
       return;
     }
-    const image = await imageUpload(data.imageFile[0]);
-    // console.log({ ...data, image, tag: selectedOption });
-    await axiosSecure.post("/user/add-post", {
-      ...data,
-      image,
-      tag: selectedOption,
-    });
-    navigate("/dashboard/my-posts");
-    toast.success("Post added successfully");
+    try {
+      setIsLoading(true);
+      // await imageKitUplader(data.imageFile[0]);
+      // console.log(cloudinaryResp);
+      const image = await imageUpload(data.imageFile[0]);
+      // console.log({ ...data, image, tag: selectedOption });
+      await axiosSecure.post("/user/add-post", {
+        ...data,
+        image,
+        tag: selectedOption,
+      });
+      navigate("/dashboard/my-posts");
+      setIsLoading(false);
+      toast.success("Post added successfully");
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error?.response?.data?.error?.code === 313) {
+        toast.error("Unavailable image format!!! Please upload another image");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (isLoading) return <LoadContent />;
 
   return (
     <div className="max-w-screen-lg mt-12 mx-auto">
@@ -159,7 +175,7 @@ const AddPost = () => {
             type="number"
             min={0}
             defaultValue={0}
-            {...register("upVote")}
+            {...register("upVotes")}
             placeholder="Add the number of up votes"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
@@ -171,7 +187,7 @@ const AddPost = () => {
             type="number"
             min={0}
             defaultValue={0}
-            {...register("downVote")}
+            {...register("downVotes")}
             placeholder="Add the number of down votes"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
