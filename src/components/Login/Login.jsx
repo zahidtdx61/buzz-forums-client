@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -5,9 +6,8 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import PropTypes from "prop-types";
 
-const Login = ({tabIndex}) => {
+const Login = ({ tabIndex }) => {
   const { register, handleSubmit } = useForm();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
@@ -40,7 +40,7 @@ const Login = ({tabIndex}) => {
     try {
       const result = await signInEmail(email, password);
       navigate(prevPage);
-      toast.success("Welcome to Share and Savor !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(result.user);
     } catch (error) {
       setIsLoading(false);
@@ -55,7 +55,7 @@ const Login = ({tabIndex}) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Share and Savor !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -70,7 +70,7 @@ const Login = ({tabIndex}) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Share and Savor !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -306,6 +306,6 @@ const Login = ({tabIndex}) => {
 
 Login.propTypes = {
   tabIndex: PropTypes.func,
-}
+};
 
 export default Login;

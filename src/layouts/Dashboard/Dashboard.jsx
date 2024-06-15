@@ -1,11 +1,17 @@
 import { Outlet, useNavigation } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import useAuth from "../../hooks/useAuth";
-import Loader from "../../components/Loader/Loader";
+import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
   const navigation = useNavigation();
   const { isLoading } = useAuth();
+  const { role, isRoleLoading } = useRole();
+
+  if (isRoleLoading) return <Loader />;
+
+  console.log(role);
 
   if (navigation.state === "loading") return <Loader />;
   if (isLoading) return <Loader />;

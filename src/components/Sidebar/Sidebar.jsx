@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { IoLogOutOutline } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -20,7 +21,7 @@ const Sidebar = () => {
   ];
 
   const axiosSecure = useAxiosSecure();
-  const { logOut } = useAuth();
+  const { logOut, setIsLoading } = useAuth();
   const navigate = useNavigate();
 
   const navStyle = (isActive) => {
@@ -35,11 +36,15 @@ const Sidebar = () => {
 
   const handleSignOut = async () => {
     try {
-      await logOut();
+      setIsLoading(true);
       await axiosSecure.get("/user/logout");
+      await logOut();
       console.log("Sign out successful");
-      navigate("/");
+      navigate("/membership");
+      toast.success("Sign out successful");
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error.message);
     }
   };

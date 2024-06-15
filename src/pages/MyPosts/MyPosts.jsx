@@ -46,7 +46,7 @@ const MyPosts = () => {
             <th className="px-4 py-2">Delete</th>
           </tr>
         </thead>
-        {data.length === 0 ? (
+        {data?.length === 0 ? (
           <tbody>
             <tr>
               <td colSpan={6} className="text-center text-xl font-bold">

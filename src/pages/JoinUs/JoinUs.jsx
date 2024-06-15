@@ -1,15 +1,14 @@
-
 import { useState } from "react";
-import Register from "../../components/Register/Register";
-import Login from "../../components/Login/Login";
-import useAuth from "../../hooks/useAuth";
-import { Navigate, useNavigation } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Link, Navigate, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import Login from "../../components/Login/Login";
+import Register from "../../components/Register/Register";
+import useAuth from "../../hooks/useAuth";
 
 const JoinUs = () => {
   const [tab, tabIndex] = useState(0);
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const navigation = useNavigation();
   const { isLoading } = useAuth();
@@ -25,9 +24,12 @@ const JoinUs = () => {
   return (
     <section className="flex flex-col items-center justify-center font-mulish">
       <div className="flex flex-col items-center justify-center w-full max-w-2xl p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
-        <div className="text-2xl text-center font-medium font-mulish text-blue-600 text-2xl font-bold sm:text-3xl">
+        <Link
+          to={"/"}
+          className="text-2xl text-center font-medium font-mulish text-blue-600 text-2xl font-bold sm:text-3xl"
+        >
           Join Buzz Forums today and connect with a vibrant community!
-        </div>
+        </Link>
         <div className="text-center flex gap-2 font-mulish">
           <button
             onClick={() => tabIndex(0)}

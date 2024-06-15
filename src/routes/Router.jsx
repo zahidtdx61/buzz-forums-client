@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    ),
     children: [
       {
         index: true,
