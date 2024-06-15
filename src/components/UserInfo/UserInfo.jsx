@@ -1,21 +1,27 @@
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const UserInfo = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, setIsLoading } = useAuth();
   const { photoURL, displayName } = user || {};
   const axiosSecure = useAxiosSecure();
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleSignOut = async () => {
     try {
-      await logOut();
+      setIsLoading(true);
       await axiosSecure.get("/user/logout");
+      await logOut();
       console.log("Sign out successful");
+      Navigate("/");
+      toast.success("Sign out successful");
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error.message);
     }
   };

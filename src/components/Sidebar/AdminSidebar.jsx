@@ -4,20 +4,24 @@ import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   const routes = [
     {
-      name: "My Profile",
+      name: "Admin Profile",
       path: "/dashboard",
     },
     {
-      name: "Add Post",
-      path: "/dashboard/add-post",
+      name: "Manage Users",
+      path: "/dashboard/manage-users",
     },
     {
-      name: "My Posts",
-      path: "/dashboard/my-posts",
+      name: "Reported Comments",
+      path: "/dashboard/reported-comments",
     },
+    {
+      name: "Make Announcement",
+      path: "/dashboard/make-announcement",
+    }
   ];
 
   const axiosSecure = useAxiosSecure();
@@ -87,4 +91,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;

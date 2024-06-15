@@ -30,6 +30,7 @@ const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoutes>
     ),
+    errorElement: <h1>404 page Not Found</h1>,
     children: [
       {
         index: true,

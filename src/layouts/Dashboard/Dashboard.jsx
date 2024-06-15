@@ -1,5 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import AdminSidebar from "../../components/Sidebar/AdminSidebar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
@@ -19,7 +20,8 @@ const Dashboard = () => {
   return (
     <div className="w-full flex h-full">
       <div className="w-[20%] min-h-full">
-        <Sidebar />
+        {role === "user" && <Sidebar />}
+        {role === "admin" && <AdminSidebar />}
       </div>
       <div className="w-[80%] min-h-full">
         <Outlet />
