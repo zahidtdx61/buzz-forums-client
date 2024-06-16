@@ -6,7 +6,9 @@ const usePostCounter = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["my-posts"],
     queryFn: async () => {
-      const response = await axiosSecure.get("/user/get-posts");
+      const response = await axiosSecure.get(
+        "/user/get-posts?sorted=createdAt"
+      );
       const data = response.data;
       return data.data;
     },

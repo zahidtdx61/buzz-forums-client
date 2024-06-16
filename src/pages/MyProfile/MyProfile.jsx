@@ -1,5 +1,7 @@
+import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -8,14 +10,15 @@ import usePostCounter from "../../hooks/usePostCounter";
 const MyProfile = () => {
   const { user, isLoading: userLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { data: userData, isLoading } = useQuery({
     queryKey: ["my-profile", "user?.uid", "user"],
     queryFn: async () => {
       if (!user) return null;
       const response = await axiosSecure.get(`/user/find/${user?.uid}`);
-      console.log(response.data);
-      return response.data;
+      // console.log(response.data);
+      return response?.data?.data;
     },
   });
 
@@ -24,7 +27,12 @@ const MyProfile = () => {
   if (isLoading || userLoading || postLoading) return <LoadContent />;
 
   const { displayName, email, photoURL } = user || {};
-  console.log(posts?.length);
+  const { badge } = userData || {};
+
+  console.log(posts);
+
+  const goldBadge = "https://i.ibb.co/m5nn4xs/golden.png";
+  const bronzeBadge = "https://i.ibb.co/yVJ7jpX/bronze.png";
 
   return (
     <div className="min-h-[calc(100vh-80px)] w-full mt-12 p-2">
@@ -49,18 +57,51 @@ const MyProfile = () => {
               <span className="font-semibold">Name: </span>{" "}
               {displayName || "Not available"}
             </div>
-          </div>
-          <div className="mt-16 flex gap-3 items-center">
-            <p>Wish to update your profile, </p>
-            <Link
-              to="/update-profile"
-              className="px-4 py-1 bg-blue-600 rounded text-zinc-50 hover:scale-105 hover:bg-opacity-75 transition-all duration-300 ease-in-out"
-            >
-              {" "}
-              Update Profile
-            </Link>
+            <div className="mt-4 flex gap-3 items-center">
+              <p>Badge: </p>
+              <div className="flex items-center">
+                <Avatar src={badge === "bronze" ? bronzeBadge : goldBadge} />
+                <span className="text-zinc-500 capitalize">({badge})</span>
+              </div>
+            </div>
           </div>
         </div>
+
+        {posts && (
+          <div className="mt-8 mb-4">
+            <div className="text-2xl font-mulish">Your Recent Posts</div>
+            <div className="mt-4">
+              {posts.slice(0, Math.min(3, posts.length)).map((post) => (
+                <div
+                  onClick={() => navigate(`/post/${post?._id}`)}
+                  key={post._id}
+                  className="bg-zinc-100 p-4 rounded-md my-2 hover:cursor-pointer"
+                >
+                  <div className="font-semibold text-lg">{post.title}</div>
+                  <div className="text-zinc-600 mt-2 text-base">{post.description}</div>
+                  <div className="text-zinc-600 mt-2 text-sm flex flex-col">
+                    <div>Comments: {post.comments.length}</div>
+                    <div>Tag: {post.tag || "Uncategorized"}</div>
+                    <div className="flex gap-2 items-center">
+                      <span>Votes: </span>
+                      <div className="flex items-center gap-1">
+                        <span>{post.upVotes}</span>
+                        <FaArrowUp />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span>{post.downVotes}</span>
+                        <FaArrowDown />
+                      </div>
+                    </div>
+                    <div>
+                      Posted: {new Date(post.createdAt).toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
