@@ -5,6 +5,7 @@ import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import DeletePostModal from "../../components/DeletePostModal/DeletePostModal";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
@@ -36,6 +37,10 @@ const MyPosts = () => {
 
   return (
     <div className="w-[95%] mx-auto overflow-x-auto font-mulish my-8">
+      <Helmet>
+        <title>Buzz Forums | My Posts</title>
+      </Helmet>
+
       <table className="w-full text-center">
         <thead>
           <tr className="border-b-2">

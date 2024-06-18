@@ -6,6 +6,7 @@ import LoadContent from "../../components/Loader/LoadContent";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import usePostCounter from "../../hooks/usePostCounter";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user, isLoading: userLoading } = useAuth();
@@ -36,6 +37,9 @@ const MyProfile = () => {
 
   return (
     <div className="min-h-[calc(100vh-80px)] w-full mt-12 p-2">
+      <Helmet>
+        <title>Buzz Forums | My Profile</title>
+      </Helmet>
       <div className="max-w-screen-lg mx-auto flex flex-col items-center">
         <div className="text-2xl text-center font-mulish">
           Welcome, <span className="font-lexend">{displayName || "User"}</span>

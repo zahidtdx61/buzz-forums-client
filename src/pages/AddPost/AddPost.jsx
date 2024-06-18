@@ -9,6 +9,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import usePostCounter from "../../hooks/usePostCounter";
 import useRole from "../../hooks/useRole";
 import { imageUpload } from "../../utils";
+import { Helmet } from "react-helmet-async";
 
 const options = [
   { value: "TechNews", label: "Tech News" },
@@ -100,6 +101,10 @@ const AddPost = () => {
 
   return (
     <div className="max-w-screen-lg mt-12 mx-auto">
+      <Helmet>
+        <title>Buzz Forums | Add Post</title>
+      </Helmet>
+
       <div className="max-w-screen-lg mx-auto flex flex-col items-center">
         <div className="animate__animated animate__fadeInDown text-2xl text-center font-mulish">
           Welcome, <span className="font-lexend">{displayName || "User"}</span>
