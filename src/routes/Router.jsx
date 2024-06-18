@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddPost from "../pages/AddPost/AddPost";
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
+import Membership from "../pages/Membership/Membership";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import PrivateRoutes from "./PrivateRoutes";
@@ -16,6 +17,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/membership",
+        element: (
+          <PrivateRoutes>
+            <Membership />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
