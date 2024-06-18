@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
+
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const [price, setPrice] = useState(400);
+  const price = 400;
   const navigate = useNavigate();
   const { user } = useAuth();
   const [clientSecret, setClientSecret] = useState();
@@ -27,7 +28,7 @@ const CheckoutForm = () => {
   const getClientSecret = async () => {
     const { data } = await axiosSecure.post(
       `/payment/create-checkout-session`,
-      price
+      { price }
     );
     console.log("clientSecret from server--->", data);
     setClientSecret(data?.data?.clientSecret);
@@ -88,28 +89,22 @@ const CheckoutForm = () => {
     }
 
     if (paymentIntent.status === "succeeded") {
-      console.log(paymentIntent);
-      // 1. Create payment info object
+      console.log("payment---> ", paymentIntent);
       const paymentInfo = {
-        ...bookingInfo,
-        roomId: bookingInfo._id,
         transactionId: paymentIntent.id,
-        date: new Date(),
+        uid: user?.uid,
       };
-      delete paymentInfo._id;
       console.log(paymentInfo);
+
       try {
-        // 2. save payment info in booking collection (db)
-        const { data } = await axiosSecure.post("/booking", paymentInfo);
+        const { data } = await axiosSecure.post(
+          "/payment/complete-payment",
+          paymentInfo
+        );
         console.log(data);
 
-        // 3. change room status to booked in db
-        await axiosSecure.patch(`/room/status/${bookingInfo?._id}`, {
-          status: true,
-        });
-
-        toast.success("Room Booked Successfully");
-        navigate("/dashboard/my-bookings");
+        toast.success("Membership Purchased Successfully");
+        navigate("/dashboard");
       } catch (err) {
         console.log(err);
       }
@@ -126,6 +121,7 @@ const CheckoutForm = () => {
           <CardElement
             className="border border-gray-300 p-2 rounded-md mt-2 mx-auto"
             options={{
+              hidePostalCode: true,
               style: {
                 base: {
                   margin: "auto",
@@ -146,7 +142,7 @@ const CheckoutForm = () => {
             <button
               disabled={!stripe || !clientSecret || processing}
               type="submit"
-              className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+              className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed"
             >
               {processing ? (
                 <ImSpinner9 className="animate-spin m-auto" size={24} />
