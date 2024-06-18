@@ -41,6 +41,7 @@ const Register = () => {
   };
 
   const session = useAxiosSecure();
+  
   const addUserToDatabase = async (user) => {
     const { uid, email, displayName } = user;
     try {
