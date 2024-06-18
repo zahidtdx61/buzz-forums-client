@@ -31,7 +31,7 @@ const Navbar = () => {
         <div>
           <h1 className="text-xl md:text-[2rem] font-bold  select-none font-lexend">
             <NavLink to={"/"}>
-              <span className="text-4xl">Buzz Forum</span>
+              <span className="text-4xl">Buzz Forums</span>
             </NavLink>
           </h1>
         </div>
