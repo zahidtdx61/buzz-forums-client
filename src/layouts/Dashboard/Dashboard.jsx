@@ -20,8 +20,8 @@ const Dashboard = () => {
   return (
     <div className="w-full flex h-full">
       <div className="w-[20%] min-h-full">
-        {role === "user" && <Sidebar />}
-        {role === "admin" && <AdminSidebar />}
+        {role?.role === "admin" && <AdminSidebar />}
+        {role?.role === "user" && <Sidebar />}
       </div>
       <div className="w-[80%] min-h-full">
         <Outlet />
