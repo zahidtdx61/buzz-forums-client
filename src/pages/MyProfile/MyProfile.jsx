@@ -53,10 +53,22 @@ const MyProfile = () => {
               <span className="font-semibold">Email: </span>{" "}
               {email || "Not available"}
             </div>
+
             <div className="text-zinc-600">
               <span className="font-semibold">Name: </span>{" "}
               {displayName || "Not available"}
             </div>
+
+            <div className="text-zinc-600">
+              <span className="font-semibold">Total Posts: </span>{" "}
+              {posts?.length || "Not available"}
+            </div>
+
+            <div className="text-zinc-600">
+              <span className="font-semibold">Post limit: </span>{" "}
+              {badge === "bronze" ? 5 : "Unlimited"}
+            </div>
+
             <div className="mt-4 flex gap-3 items-center">
               <p>Badge: </p>
               <div className="flex items-center">
@@ -78,7 +90,9 @@ const MyProfile = () => {
                   className="bg-zinc-100 p-4 rounded-md my-2 hover:cursor-pointer"
                 >
                   <div className="font-semibold text-lg">{post.title}</div>
-                  <div className="text-zinc-600 mt-2 text-base">{post.description}</div>
+                  <div className="text-zinc-600 mt-2 text-base">
+                    {post.description}
+                  </div>
                   <div className="text-zinc-600 mt-2 text-sm flex flex-col">
                     <div>Comments: {post.comments.length}</div>
                     <div>Tag: {post.tag || "Uncategorized"}</div>

@@ -7,6 +7,7 @@ import LoadContent from "../../components/Loader/LoadContent";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import usePostCounter from "../../hooks/usePostCounter";
+import useRole from "../../hooks/useRole";
 import { imageUpload } from "../../utils";
 
 const options = [
@@ -54,7 +55,8 @@ const AddPost = () => {
   const { register, handleSubmit } = useForm();
   const { user } = useAuth();
   const { photoURL, displayName, email } = user || {};
-  const postCount = usePostCounter();
+  const { posts, isLoading: postLoading } = usePostCounter();
+  const { role, isRoleLoading } = useRole();
 
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -68,10 +70,7 @@ const AddPost = () => {
     }
     try {
       setIsLoading(true);
-      // await imageKitUplader(data.imageFile[0]);
-      // console.log(cloudinaryResp);
       const image = await imageUpload(data.imageFile[0]);
-      // console.log({ ...data, image, tag: selectedOption });
       await axiosSecure.post("/user/add-post", {
         ...data,
         image,
@@ -91,7 +90,13 @@ const AddPost = () => {
     }
   };
 
-  if (isLoading) return <LoadContent />;
+  if (isLoading || postLoading || isRoleLoading) return <LoadContent />;
+
+  if (role?.badge === "bronze" && posts?.length >= 5) {
+    toast.error(
+      "You have reached the maximum limit of posts for your badge. Please upgrade your badge to 'Gold' to add more posts"
+    );
+  }
 
   return (
     <div className="max-w-screen-lg mt-12 mx-auto">
@@ -195,9 +200,9 @@ const AddPost = () => {
 
         <div>
           <button
-            disabled={postCount.length >= 5}
+            disabled={role?.badge === "bronze" && posts?.length >= 5}
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:cursor-not-allowed"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:cursor-not-allowed disabled:bg-zinc-300 disabled:text-gray-500"
           >
             Submit
           </button>
