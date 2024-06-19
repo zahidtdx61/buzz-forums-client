@@ -18,7 +18,7 @@ const MyProfile = () => {
     queryFn: async () => {
       if (!user) return null;
       const response = await axiosSecure.get(`/user/find/${user?.uid}`);
-      // console.log(response.data);
+      console.log(response.data);
       return response?.data?.data;
     },
   });
@@ -30,7 +30,7 @@ const MyProfile = () => {
   const { displayName, email, photoURL } = user || {};
   const { badge } = userData || {};
 
-  console.log(posts);
+  // console.log(posts);
 
   const goldBadge = "https://i.ibb.co/m5nn4xs/golden.png";
   const bronzeBadge = "https://i.ibb.co/yVJ7jpX/bronze.png";

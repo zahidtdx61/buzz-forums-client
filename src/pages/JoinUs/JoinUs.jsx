@@ -1,5 +1,4 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { Link, Navigate, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import Login from "../../components/Login/Login";
@@ -17,7 +16,7 @@ const JoinUs = () => {
   if (isLoading) return <Loader />;
 
   if (user) {
-    toast.error("You are already signed in");
+    // toast.error("You are already signed in");
     return <Navigate to="/" />;
   }
 

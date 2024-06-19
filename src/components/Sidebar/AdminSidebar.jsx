@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { IoLogOutOutline } from "react-icons/io5";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -56,7 +56,7 @@ const AdminSidebar = () => {
   return (
     <div className="w-full min-h-svh h-full bg-gray-100 flex flex-col">
       <div className="p-4 text-center">
-        <h1 className="text-4xl font-bold">Buzz Forums</h1>
+        <Link to={"/"} className="text-4xl font-bold">Buzz Forums</Link>
       </div>
 
       <div className="font-mulish font-medium flex flex-col mt-12 flex-1">

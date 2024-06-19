@@ -46,12 +46,12 @@ const Register = () => {
     const { uid, email, displayName } = user;
     try {
       // console.log({ uid, email, displayName, photoURL, session });
-      await session.post("/user/register", {
+      const response = await session.post("/user/register", {
         uid,
         email,
         name: displayName,
       });
-      // console.log(response);
+      console.log(response);
     } catch (error) {
       console.log("Error: ", error);
     }
