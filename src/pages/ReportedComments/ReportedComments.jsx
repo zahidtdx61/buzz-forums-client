@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ReportedComments = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: comments, isLoading } = useQuery({
+  const {
+    data: comments,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["reported-comments"],
     queryFn: async () => {
       const response = await axiosSecure.get("/admin/reported-comments");
@@ -15,7 +20,29 @@ const ReportedComments = () => {
     },
   });
 
-  if (isLoading) return <LoadContent />;
+  const { mutateAsync, isLoading: mutationLoading } = useMutation({
+    mutationFn: async (commentId) => {
+      const response = await axiosSecure.delete(
+        `/admin/delete-comment/${commentId}`
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      refetch();
+      toast.success("Comment Deleted Successfully");
+    },
+  });
+
+  const deleteComment = async (commentId) => {
+    try {
+      await mutateAsync(commentId);
+    } catch (error) {
+      console.log(error);
+      toast.error("Error Deleting Comment");
+    }
+  };
+
+  if (isLoading || mutationLoading) return <LoadContent />;
 
   return (
     <div>
@@ -43,16 +70,23 @@ const ReportedComments = () => {
               </thead>
 
               <tbody>
-              {comments?.length !== 0 &&
-                comments?.map((comment) => (
-                  <tr key={comment._id}>
-                    <td className="text-left p-2">{comment.comment}</td>
-                    <td>{comment.userId.email}</td>
-                    <td>{comment.feedback}</td>
-                    <td><button className="text-white bg-red-600 px-5 py-1 rounded-md">Delete</button></td>
-                  </tr>
-                ))}
-            </tbody>
+                {comments?.length !== 0 &&
+                  comments?.map((comment) => (
+                    <tr key={comment._id}>
+                      <td className="text-left p-2">{comment.comment}</td>
+                      <td>{comment.userId.email}</td>
+                      <td>{comment.feedback}</td>
+                      <td>
+                        <button
+                          onClick={() => deleteComment(comment._id)}
+                          className="text-white bg-red-600 px-5 py-1 rounded-md"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
             </table>
           </div>
         )}
