@@ -1,15 +1,16 @@
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 
 const UserInfo = () => {
   const { user, logOut, setIsLoading } = useAuth();
   const { photoURL, displayName } = user || {};
   const axiosSecure = useAxiosSecure();
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
@@ -17,7 +18,7 @@ const UserInfo = () => {
       await axiosSecure.get("/user/logout");
       await logOut();
       console.log("Sign out successful");
-      Navigate("/");
+      navigate("/");
       toast.success("Sign out successful");
       setIsLoading(false);
     } catch (error) {
