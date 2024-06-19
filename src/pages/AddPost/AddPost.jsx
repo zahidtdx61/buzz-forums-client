@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +10,6 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import usePostCounter from "../../hooks/usePostCounter";
 import useRole from "../../hooks/useRole";
 import { imageUpload } from "../../utils";
-import { Helmet } from "react-helmet-async";
 
 const options = [
   { value: "TechNews", label: "Tech News" },
@@ -105,7 +105,7 @@ const AddPost = () => {
         <title>Buzz Forums | Add Post</title>
       </Helmet>
 
-      <div className="max-w-screen-lg mx-auto flex flex-col items-center">
+      <div className="w-[95%] max-w-screen-lg mx-auto flex flex-col items-center">
         <div className="animate__animated animate__fadeInDown text-2xl text-center font-mulish">
           Welcome, <span className="font-lexend">{displayName || "User"}</span>
         </div>
@@ -117,7 +117,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="p-4">
           <div className="mt-8 text-base font-mulish ">
             <div className="text-zinc-600">
               <span className="font-semibold">Email: </span>{" "}
@@ -131,8 +131,11 @@ const AddPost = () => {
         </div>
       </div>
 
-      <form className="space-y-5 mb-8" onSubmit={handleSubmit(handleFormData)}>
-        <div>
+      <form
+        className="space-y-5 mb-8 mx-auto"
+        onSubmit={handleSubmit(handleFormData)}
+      >
+        <div className="flex flex-col mx-4">
           <label className="font-medium">Post Title</label>
           <input
             type="text"
@@ -143,7 +146,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col mx-4">
           <label className="font-medium">Post Description</label>
           <textarea
             required
@@ -153,7 +156,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col mx-4">
           <label htmlFor="image" className="font-medium">
             Select an Image for your Post:
           </label>
@@ -166,7 +169,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col mx-4">
           <label htmlFor="image" className="font-medium">
             Select a Tag for your Post:
           </label>
@@ -179,7 +182,7 @@ const AddPost = () => {
           {tagError && <p className="text-red-500">Please select a tag</p>}
         </div>
 
-        <div>
+        <div className="flex flex-col mx-4">
           <label className="font-medium">Up Vote</label>
           <input
             type="number"
@@ -191,7 +194,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col mx-4">
           <label className="font-medium">Down Vote</label>
           <input
             type="number"
@@ -203,7 +206,7 @@ const AddPost = () => {
           />
         </div>
 
-        <div>
+        <div className="mx-4">
           <button
             disabled={role?.badge === "bronze" && posts?.length >= 5}
             type="submit"

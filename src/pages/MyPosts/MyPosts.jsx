@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import DeletePostModal from "../../components/DeletePostModal/DeletePostModal";
 import LoadContent from "../../components/Loader/LoadContent";
+import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyPosts = () => {
@@ -13,18 +14,19 @@ const MyPosts = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openComment, setOpenComment] = useState(false);
   const [postId, setPostId] = useState("");
+  const { user, isLoading: userLoading } = useAuth();
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["my-posts"],
     queryFn: async () => {
-      const response = await axiosSecure.get("/user/get-posts");
+      const response = await axiosSecure.get(`/user/get-posts?id=${user?.uid}`);
       const data = response.data;
       // console.log(data.data);
       return data.data;
     },
   });
 
-  if (isLoading) {
+  if (isLoading || userLoading) {
     return <LoadContent />;
   }
 
@@ -87,7 +89,10 @@ const MyPosts = () => {
                   </div>
                 </td>
                 <td className="px-4 py-2">
-                  <Link to={`/dashboard/comments/${post._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md w-fit mx-auto">
+                  <Link
+                    to={`/dashboard/comments/${post._id}`}
+                    className="bg-blue-500 text-white px-2 py-1 rounded-md w-fit mx-auto"
+                  >
                     Comment{" "}
                     <span className="text-blue-200">
                       ({post.comments.length})

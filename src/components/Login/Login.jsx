@@ -96,7 +96,7 @@ const Login = ({ tabIndex }) => {
           </div>
 
           {/* login form */}
-          <form onSubmit={handleSubmit(handleSignIn)} className="space-y-5">
+          <form onSubmit={handleSubmit(handleSignIn)} className="space-y-5 mx-auto">
             <div>
               <label className="font-medium">Email</label>
               <input

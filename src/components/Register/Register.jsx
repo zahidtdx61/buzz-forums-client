@@ -266,7 +266,7 @@ const Register = () => {
             <Divider className="text-sm ">Or continue with</Divider>
 
             {/* sign up form */}
-            <form onSubmit={handleSubmit(handleSignUp)} className="space-y-5">
+            <form onSubmit={handleSubmit(handleSignUp)} className="space-y-5 mx-auto">
               <div>
                 <label className="font-medium">Name</label>
                 <input
