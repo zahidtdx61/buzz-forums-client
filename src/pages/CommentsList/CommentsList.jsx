@@ -31,27 +31,31 @@ const CommentsList = () => {
         <span className="font-bold">Your Post Title: </span> {data?.title}
       </p>
 
-      <p className="text-xl font-semibold text-slate-400 mt-4">
+      <p className="text-xl text-center font-semibold text-slate-400 mt-4">
         {data?.comments?.length === 0 ? "No Comments Found" : ""}
       </p>
 
-      <table className="w-full text-center mt-8">
-        <thead>
-          <tr className="border-b-2">
-            <th className="px-4 py-2">Comment</th>
-            <th className="px-4 py-2">Commented At</th>
-            <th className="px-4 py-2">Commenter Email</th>
-            <th className="px-4 py-2">Feedback</th>
-            <th className="px-4 py-2">Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.comments?.length !== 0 &&
-            data?.comments?.map((comment) => (
-              <CommentContent key={comment._id} comment={comment} />
-            ))}
-        </tbody>
-      </table>
+      {data?.comments?.length !== 0 && (
+        <div className="mx-auto overflow-x-auto">
+          <table className="w-full text-center mt-8">
+            <thead>
+              <tr className="border-b-2">
+                <th className="px-4 py-2">Comment</th>
+                <th className="px-4 py-2">Commented At</th>
+                <th className="px-4 py-2">Commenter Email</th>
+                <th className="px-4 py-2">Feedback</th>
+                <th className="px-4 py-2">Report</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.comments?.length !== 0 &&
+                data?.comments?.map((comment) => (
+                  <CommentContent key={comment._id} comment={comment} />
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
