@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadContent from "../../components/Loader/LoadContent";
+import AdminPieChart from "./AdminPieChat";
 
 const AdminProfile = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,9 +18,9 @@ const AdminProfile = () => {
 
   return (
     <div className="w-[95%] lg:max-w-screen-lg mx-auto mb-4">
-      <div>
+      <div className="mt-8">
         <div className="text-xl font-mulish">Site Statistics:</div>
-        <div className="mt-4">
+        <div className="">
           <div className="text-base text-slate-600 font-semibold">
             Total Users:{" "}
             <span className="font-normal">
@@ -40,6 +41,8 @@ const AdminProfile = () => {
           </div>
         </div>
       </div>
+
+      <AdminPieChart  siteData={siteData} />
     </div>
   );
 };
