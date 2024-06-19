@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import DeletePostModal from "../../components/DeletePostModal/DeletePostModal";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Helmet } from "react-helmet-async";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
@@ -64,7 +65,7 @@ const MyPosts = () => {
             {data.map((post) => (
               <tr key={post._id} className="border-b">
                 <td className="px-4 py-2">{post.title}</td>
-                
+
                 <td className="px-4 py-2 flex justify-center items-center">
                   <img
                     src={post.image}
@@ -86,18 +87,12 @@ const MyPosts = () => {
                   </div>
                 </td>
                 <td className="px-4 py-2">
-                  <button
-                    onClick={() => {
-                      setPostId(post._id);
-                      setOpenComment(true);
-                    }}
-                    className="bg-blue-500 text-white px-2 py-1 rounded-md w-fit mx-auto"
-                  >
+                  <Link to={`/dashboard/comments/${post._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md w-fit mx-auto">
                     Comment{" "}
                     <span className="text-blue-200">
                       ({post.comments.length})
                     </span>
-                  </button>
+                  </Link>
                 </td>
                 <td className="px-4 py-2">
                   <button

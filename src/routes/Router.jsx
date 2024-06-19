@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddPost from "../pages/AddPost/AddPost";
+import CommentsList from "../pages/CommentsList/CommentsList";
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
 import Membership from "../pages/Membership/Membership";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "my-posts",
         element: <MyPosts />,
+      },
+      {
+        path: "comments/:postId",
+        element: <CommentsList />,
       },
     ],
   },
