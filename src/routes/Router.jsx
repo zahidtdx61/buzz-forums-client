@@ -11,6 +11,7 @@ import ManageUsers from "../pages/ManageUsers/ManageUsers";
 import Membership from "../pages/Membership/Membership";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import PostDetails from "../pages/PostDetails/PostDetails";
 import ReportedComments from "../pages/ReportedComments/ReportedComments";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             <Membership />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/post/:postId",
+        element: <PostDetails />,
       },
     ],
   },

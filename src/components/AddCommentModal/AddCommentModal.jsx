@@ -14,7 +14,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const AddCommentModal = ({ open, setOpen, postId, refetch }) => {
+const AddCommentModal = ({ open, setOpen, postId }) => {
   const axiosSecure = useAxiosSecure();
   const [comment, setComment] = useState("");
 
@@ -26,7 +26,6 @@ const AddCommentModal = ({ open, setOpen, postId, refetch }) => {
       return response.data.success;
     },
     onSuccess: () => {
-      refetch();
       setOpen(false);
       setComment("");
       toast.success("Comment added successfully");
