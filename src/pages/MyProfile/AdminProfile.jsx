@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { ImSpinner4 } from "react-icons/im";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import AdminPieChart from "./AdminPieChat";
-import { ImSpinner4 } from "react-icons/im";
-import { useState } from "react";
 
 const AdminProfile = () => {
   const axiosSecure = useAxiosSecure();

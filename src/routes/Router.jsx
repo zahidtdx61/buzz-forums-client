@@ -7,6 +7,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
 import MakeAnnouncement from "../pages/MakeAnnouncement/MakeAnnouncement";
+import ManageUsers from "../pages/ManageUsers/ManageUsers";
 import Membership from "../pages/Membership/Membership";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "make-announcement",
         element: <MakeAnnouncement />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
       },
     ],
   },
