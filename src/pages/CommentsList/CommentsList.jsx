@@ -36,7 +36,7 @@ const CommentsList = () => {
       </p>
 
       {data?.comments?.length !== 0 && (
-        <div className="mx-auto overflow-x-scroll lg:overflow-visible">
+        <div className="mx-auto overflow-auto lg:overflow-visible">
           <table className="w-full text-center mt-8">
             <thead>
               <tr className="border-b-2">

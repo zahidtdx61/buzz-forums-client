@@ -23,7 +23,7 @@ const Dashboard = () => {
         {role?.role === "admin" && <AdminSidebar />}
         {role?.role === "user" && <Sidebar />}
       </div>
-      <div className="w-full lg:w-[80%] min-h-full">
+      <div className="w-full lg:w-[80%] min-h-svh">
         <Outlet />
       </div>
       <p className="text-center text-gray-400 px-2 lg:hidden mb-4">
