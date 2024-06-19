@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAuth from "../../hooks/useAuth";
@@ -127,6 +127,17 @@ const AddPost = () => {
             className="h-full w-full object-cover object-center"
           />
         </div>
+        
+        {
+          (role?.badge === "bronze" && posts?.length >= 5) &&(
+            <div className="mt-10 max-w-screen-lg mx-auto flex flex-col justify-center">
+              <p className="text-xl text-red-500 text-center">You have reached to maximum post capacity as Bronze user of 5 posts. If you want to post more feel free buy our Gold Membership </p>
+              <button className="mt-8 px-5 py-1 rounded-md bg-red-600 text-white w-fit block mx-auto">
+                <Link to="/membership">Be a Gold Member</Link>
+              </button>
+            </div>
+          )
+        }
 
         <div className="p-4">
           <div className="mt-8 text-base font-mulish ">
