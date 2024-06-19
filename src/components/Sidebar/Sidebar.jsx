@@ -1,10 +1,10 @@
-import toast from "react-hot-toast";
 import {
   Accordion,
   AccordionDetails,
   AccordionGroup,
   AccordionSummary,
 } from "@mui/joy";
+import toast from "react-hot-toast";
 import { IoLogOutOutline } from "react-icons/io5";
 import { MdMenuOpen } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -94,39 +94,41 @@ const Sidebar = () => {
       </div>
 
       {/* for small devices */}
-      <AccordionGroup disableDivider sx={{ width: "100%" }}>
-        <Accordion>
-          <AccordionSummary indicator={<MdMenuOpen size={30} />}>
-            <div className="p-2 text-center">
-              <Link to={"/"} className="text-4xl font-bold">
-                Buzz Forums
-              </Link>
-            </div>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div className="font-mulish font-medium flex flex-col flex-1">
-              {routes.map((route) => (
-                <NavLink
-                  key={route.path}
-                  to={route.path}
-                  end
-                  className={({ isActive }) => navStyle(isActive)}
-                >
-                  {route.name}
-                </NavLink>
-              ))}
+      <div className="lg:hidden">
+        <AccordionGroup disableDivider sx={{ width: "100%" }}>
+          <Accordion>
+            <AccordionSummary indicator={<MdMenuOpen size={30} />}>
+              <div className="p-2 text-center">
+                <Link to={"/"} className="text-4xl font-bold">
+                  Buzz Forums
+                </Link>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className="font-mulish font-medium flex flex-col flex-1">
+                {routes.map((route) => (
+                  <NavLink
+                    key={route.path}
+                    to={route.path}
+                    end
+                    className={({ isActive }) => navStyle(isActive)}
+                  >
+                    {route.name}
+                  </NavLink>
+                ))}
 
-              <button
-                className="text-lg font-bold text-center text-zinc-500 flex gap-1 ml-4 items-center w-full py-2 px-3 hover:bg-zinc-300 cursor-pointer"
-                onClick={handleSignOut}
-              >
-                <IoLogOutOutline size={20} />
-                <p>Logout</p>
-              </button>
-            </div>
-          </AccordionDetails>
-        </Accordion>
-      </AccordionGroup>
+                <button
+                  className="text-lg font-bold text-center text-zinc-500 flex gap-1 ml-4 items-center w-full py-2 px-3 hover:bg-zinc-300 cursor-pointer"
+                  onClick={handleSignOut}
+                >
+                  <IoLogOutOutline size={20} />
+                  <p>Logout</p>
+                </button>
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        </AccordionGroup>
+      </div>
     </>
   );
 };

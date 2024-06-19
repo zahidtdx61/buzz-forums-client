@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -11,43 +12,43 @@ import usePostCounter from "../../hooks/usePostCounter";
 import useRole from "../../hooks/useRole";
 import { imageUpload } from "../../utils";
 
-const options = [
-  { value: "TechNews", label: "Tech News" },
-  { value: "Gadgets", label: "Gadgets" },
-  { value: "Programming", label: "Programming" },
-  { value: "Software", label: "Software" },
-  { value: "Hardware", label: "Hardware" },
-  { value: "Startups", label: "Startups" },
-  { value: "CyberSecurity", label: "Cyber Security" },
-  { value: "AI", label: "Artificial Intelligence" },
-  { value: "Gaming", label: "Gaming" },
-  { value: "ArtsAndCrafts", label: "Arts and Crafts" },
-  { value: "DIY", label: "DIY" },
-  { value: "Photography", label: "Photography" },
-  { value: "Cooking", label: "Cooking" },
-  { value: "Gardening", label: "Gardening" },
-  { value: "Fitness", label: "Fitness" },
-  { value: "Travel", label: "Travel" },
-  { value: "Books", label: "Books" },
-  { value: "Movies", label: "Movies" },
-  { value: "Music", label: "Music" },
-  { value: "CareerAdvice", label: "Career Advice" },
-  { value: "JobSearch", label: "Job Search" },
-  { value: "Networking", label: "Networking" },
-  { value: "Entrepreneurship", label: "Entrepreneurship" },
-  { value: "IndustryTrends", label: "Industry Trends" },
-  { value: "Leadership", label: "Leadership" },
-  { value: "SkillsDevelopment", label: "Skills Development" },
-  { value: "WorkLifeBalance", label: "Work-Life Balance" },
-  { value: "StudyTips", label: "Study Tips" },
-  { value: "HomeworkHelp", label: "Homework Help" },
-  { value: "Exams", label: "Exams" },
-  { value: "Research", label: "Research" },
-  { value: "Scholarships", label: "Scholarships" },
-  { value: "StudentLife", label: "Student Life" },
-  { value: "Courses", label: "Courses" },
-  { value: "Tutoring", label: "Tutoring" },
-];
+// const options = [
+//   { value: "TechNews", label: "Tech News" },
+//   { value: "Gadgets", label: "Gadgets" },
+//   { value: "Programming", label: "Programming" },
+//   { value: "Software", label: "Software" },
+//   { value: "Hardware", label: "Hardware" },
+//   { value: "Startups", label: "Startups" },
+//   { value: "CyberSecurity", label: "Cyber Security" },
+//   { value: "AI", label: "Artificial Intelligence" },
+//   { value: "Gaming", label: "Gaming" },
+//   { value: "ArtsAndCrafts", label: "Arts and Crafts" },
+//   { value: "DIY", label: "DIY" },
+//   { value: "Photography", label: "Photography" },
+//   { value: "Cooking", label: "Cooking" },
+//   { value: "Gardening", label: "Gardening" },
+//   { value: "Fitness", label: "Fitness" },
+//   { value: "Travel", label: "Travel" },
+//   { value: "Books", label: "Books" },
+//   { value: "Movies", label: "Movies" },
+//   { value: "Music", label: "Music" },
+//   { value: "CareerAdvice", label: "Career Advice" },
+//   { value: "JobSearch", label: "Job Search" },
+//   { value: "Networking", label: "Networking" },
+//   { value: "Entrepreneurship", label: "Entrepreneurship" },
+//   { value: "IndustryTrends", label: "Industry Trends" },
+//   { value: "Leadership", label: "Leadership" },
+//   { value: "SkillsDevelopment", label: "Skills Development" },
+//   { value: "WorkLifeBalance", label: "Work-Life Balance" },
+//   { value: "StudyTips", label: "Study Tips" },
+//   { value: "HomeworkHelp", label: "Homework Help" },
+//   { value: "Exams", label: "Exams" },
+//   { value: "Research", label: "Research" },
+//   { value: "Scholarships", label: "Scholarships" },
+//   { value: "StudentLife", label: "Student Life" },
+//   { value: "Courses", label: "Courses" },
+//   { value: "Tutoring", label: "Tutoring" },
+// ];
 
 const AddPost = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,6 +62,15 @@ const AddPost = () => {
 
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+
+  const { data: options, isLoading: tagsLoading } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const response = await axiosSecure.get("/user/tags");
+      const data = response.data;
+      return data.data;
+    },
+  });
 
   const handleFormData = async (data) => {
     setTagError(false);
@@ -91,7 +101,8 @@ const AddPost = () => {
     }
   };
 
-  if (isLoading || postLoading || isRoleLoading) return <LoadContent />;
+  if (isLoading || postLoading || isRoleLoading || tagsLoading)
+    return <LoadContent />;
 
   if (role?.badge === "bronze" && posts?.length >= 5) {
     toast.error(
