@@ -1,23 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import AdminPieChart from "./AdminPieChat";
-import { useForm } from "react-hook-form";
+import { ImSpinner4 } from "react-icons/im";
+import { useState } from "react";
 
 const AdminProfile = () => {
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormData = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
-      const response = await axiosSecure.post("/admin/add-tag", data);
-      console.log(response.data);
+      setIsLoading(true);
+      await axiosSecure.post("/admin/add-tag", data);
+      // console.log(response.data);
+      toast.success("Tag added successfully!!!");
+      setIsLoading(false);
       reset();
     } catch (error) {
+      toast.error("Something went wrong during adding Tag!!!");
+      setIsLoading(false);
       console.log(error);
     }
-  }
+  };
 
   const { data: siteData, isLoading: statsLoading } = useQuery({
     queryKey: ["site-stats"],
@@ -81,7 +90,9 @@ const AdminProfile = () => {
           </div>
 
           <div>
-            <label className="font-medium">Add a short name or Short description for the tag</label>
+            <label className="font-medium">
+              Add a short name or Short description for the tag
+            </label>
             <input
               type="text"
               required
@@ -94,9 +105,10 @@ const AdminProfile = () => {
           <div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:cursor-not-allowed disabled:bg-zinc-300 disabled:text-gray-500"
+              disabled={isLoading}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:cursor-not-allowed"
             >
-              Submit
+              {isLoading ? <ImSpinner4 className="animate-spin" /> : "Add Tag"}
             </button>
           </div>
         </form>

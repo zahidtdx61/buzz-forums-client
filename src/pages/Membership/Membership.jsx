@@ -47,7 +47,7 @@ const Membership = () => {
       </div>
 
       <div className="mt-10 text-blue-400">
-        <p>Please fill up necessary info to be a Gold Member.</p>
+        <p>{(role?.badge === "gold") ? "Please fill up necessary info in order to donate us." : "Please fill up necessary info to be a Gold Member."}</p>
         <Elements stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
