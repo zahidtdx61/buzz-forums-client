@@ -21,13 +21,14 @@ const Login = ({ tabIndex }) => {
   const session = useAxiosSecure();
   //  name, email, uid, image
   const addUserToDatabase = async (user) => {
-    const { uid, email, displayName } = user;
+    const { uid, email, displayName, photoURL } = user;
     try {
       // console.log({ uid, email, displayName, photoURL, session });
       const response = await session.post("/user/register", {
         uid,
         email,
         name: displayName,
+        image: photoURL,
       });
       console.log(response);
     } catch (error) {
