@@ -8,6 +8,7 @@ import JoinUs from "../pages/JoinUs/JoinUs";
 import Membership from "../pages/Membership/Membership";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import ReportedComments from "../pages/ReportedComments/ReportedComments";
 import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "comments/:postId",
         element: <CommentsList />,
+      },
+      {
+        path: "reported-comments",
+        element: <ReportedComments />,
       },
     ],
   },
