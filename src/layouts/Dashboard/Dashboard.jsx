@@ -18,12 +18,12 @@ const Dashboard = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="w-full flex h-full">
-      <div className="w-[20%] min-h-full">
+    <div className="w-full flex flex-col lg:flex-row h-full">
+      <div className="w-full lg:w-[20%] lg:min-h-full">
         {role?.role === "admin" && <AdminSidebar />}
         {role?.role === "user" && <Sidebar />}
       </div>
-      <div className="w-[80%] min-h-full">
+      <div className="w-full lg:w-[80%] lg:min-h-full">
         <Outlet />
       </div>
     </div>

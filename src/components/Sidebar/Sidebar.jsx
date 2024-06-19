@@ -50,7 +50,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-full min-h-svh h-full bg-gray-100 flex flex-col">
+    <div className="w-full min-h-svh h-full bg-gray-100 lg:flex lg:flex-col hidden lg:static">
       <Link to={"/"} className="p-4 text-center text-4xl font-bold">
         Buzz Forums
       </Link>

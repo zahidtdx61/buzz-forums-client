@@ -45,7 +45,7 @@ const ReportedComments = () => {
   if (isLoading || mutationLoading) return <LoadContent />;
 
   return (
-    <div>
+    <div className="mb-8">
       <div className="w-[95%] mx-auto">
         <h1 className="text-2xl font-bold text-center mt-8">
           All Reported Comments.
