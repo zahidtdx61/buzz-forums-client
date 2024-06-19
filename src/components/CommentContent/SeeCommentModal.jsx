@@ -1,4 +1,5 @@
 import { Modal, ModalClose, ModalDialog, Typography } from "@mui/joy";
+import PropTypes from "prop-types";
 
 const SeeCommentModal = ({ open, setOpen, comment }) => {
   return (
@@ -15,6 +16,12 @@ const SeeCommentModal = ({ open, setOpen, comment }) => {
       </ModalDialog>
     </Modal>
   );
+};
+
+SeeCommentModal.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  comment: PropTypes.object,
 };
 
 export default SeeCommentModal;
