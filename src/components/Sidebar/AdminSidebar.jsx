@@ -129,10 +129,6 @@ const AdminSidebar = () => {
                 <IoLogOutOutline size={20} />
                 <p>Logout</p>
               </button>
-
-              <p className="text-center text-gray-400 px-2">
-                &copy; 2024 Buzz Forums. All rights reserved.
-              </p>
             </div>
           </AccordionDetails>
         </Accordion>

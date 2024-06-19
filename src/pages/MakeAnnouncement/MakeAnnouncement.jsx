@@ -28,7 +28,7 @@ const MakeAnnouncement = () => {
   const { displayName, photoURL } = user || {};
 
   return (
-    <div className="min-h-[calc(100vh-80px)] w-full mt-12 p-2">
+    <div className="min-h-[calc(100vh-80px)] mx-auto w-full mt-12 p-2">
       <Helmet>
         <title>Buzz Forums | Make Announcement</title>
       </Helmet>
@@ -48,7 +48,7 @@ const MakeAnnouncement = () => {
         </div>
       </div>
 
-      <form className="space-y-5 mb-8" onSubmit={handleSubmit(handleFormData)}>
+      <form className="space-y-5 mb-8 mx-auto" onSubmit={handleSubmit(handleFormData)}>
         <div>
           <label className="font-medium">Announcement Title</label>
           <input
