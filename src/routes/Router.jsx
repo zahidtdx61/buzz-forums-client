@@ -3,8 +3,10 @@ import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddPost from "../pages/AddPost/AddPost";
 import CommentsList from "../pages/CommentsList/CommentsList";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
+import MakeAnnouncement from "../pages/MakeAnnouncement/MakeAnnouncement";
 import Membership from "../pages/Membership/Membership";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyProfile from "../pages/MyProfile/MyProfile";
@@ -63,11 +65,15 @@ const router = createBrowserRouter([
         path: "reported-comments",
         element: <ReportedComments />,
       },
+      {
+        path: "make-announcement",
+        element: <MakeAnnouncement />,
+      },
     ],
   },
   {
     path: "*",
-    element: <h1>404 Not Found</h1>,
+    element: <ErrorPage />,
   },
 ]);
 

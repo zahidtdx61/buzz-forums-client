@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   if (isRoleLoading) return <Loader />;
 
-  console.log(role);
+  // console.log(role);
 
   if (navigation.state === "loading") return <Loader />;
   if (isLoading) return <Loader />;
