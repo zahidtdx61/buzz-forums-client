@@ -8,7 +8,7 @@ const useAnnouncement = () => {
     queryKey: ["announcements"],
     queryFn: async () => {
       const response = await axios.get("/user/announcements");
-      console.log(response?.data?.data);
+      // console.log(response?.data?.data);
       return response?.data?.data;
     },
   });
