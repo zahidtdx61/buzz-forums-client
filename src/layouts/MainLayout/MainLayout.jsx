@@ -1,7 +1,8 @@
 import { Outlet, useNavigation } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
+import Loader from "../../components/Loader/Loader";
 import Navbar from "../../components/Navbar/Navbar";
 import useAuth from "../../hooks/useAuth";
-import Loader from "../../components/Loader/Loader";
 
 const MainLayout = () => {
   const navigation = useNavigation();
@@ -15,7 +16,10 @@ const MainLayout = () => {
       <div className="w-full h-20">
         <Navbar />
       </div>
-      <Outlet />
+      <div className="min-h-svh">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 };
