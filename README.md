@@ -8,6 +8,13 @@ Welcome to [Buzz Forums](https://buzz-forums.vercel.app), the ultimate destinati
 
 You can visit our live site at [Buzz Forums](https://buzz-forums.vercel.app/).
 
+## Sample Credentials
+
+```
+Admin Email = admin@admin.admin
+Admin Password = Admin123
+```
+
 ## Features
 
 ### User Features
