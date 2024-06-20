@@ -13,8 +13,8 @@ const Tags = ({ tag, setTag, allTags, tagsLoading }) => {
             onClick={() => setTag(tagItem.value)}
             className={`px-4 py-2 rounded ${
               tag === tagItem.value
-                ? "bg-blue-500 text-white"
-                : "bg-blue-200 text-blue-800"
+                ? "bg-slate-500 text-white"
+                : "bg-slate-200 text-slate-800"
             }`}
           >
             #{tagItem.label}
