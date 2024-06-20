@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Announcements from "../../components/Announcements/Announcements";
+import Banner from "../../components/Banner/Banner";
 import Loader from "../../components/Loader/Loader";
 import PostPagination from "../../components/PostSection/PostPagination";
 import PostSection from "../../components/PostSection/PostSection";
@@ -31,7 +32,7 @@ const Home = () => {
   const { data: allPosts, isLoading: postsLoading } = useQuery({
     queryKey: ["posts", tag, search, sorted, page, size],
     queryFn: async () => {
-      console.log({page, size});
+      console.log({ page, size });
       const response = await axios.get(
         `/user/get-posts?sorted=${sorted}&tag=${tag}&search=${search}&page=${page}&size=${size}`
       );
@@ -68,6 +69,8 @@ const Home = () => {
         <title>Buzz Forums | Home</title>
       </Helmet>
       <div className="min-h-[calc(100vh-80px)] mx-auto w-full mt-12 p-2">
+        <Banner />
+
         <Tags
           tag={tag}
           setTag={setTag}
@@ -85,7 +88,11 @@ const Home = () => {
           setSorted={setSorted}
         />
         <div className="max-w-screen-md mx-auto mb-8">
-          <PostPagination totalPages={totalPages} currPage={page} setPage={setPage} />
+          <PostPagination
+            totalPages={totalPages}
+            currPage={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-'import "swiper/css";
+import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -61,7 +61,9 @@ const Banner = () => {
           </span>
         </h1>
         <p className="text-base lg:text-xl w-[80%] md:w-[70%] lg:w-[60%] mx-auto text-slate-200">
-        Welcome to Buzz Forums! Join our vibrant community to discuss tech trends, share DIY projects, get career advice, and more. Connect, engage, and enjoy!
+          Welcome to Buzz Forums! Join our vibrant community to discuss tech
+          trends, share DIY projects, get career advice, and more. Connect,
+          engage, and enjoy!
         </p>
       </div>
     </div>
@@ -69,4 +71,3 @@ const Banner = () => {
 };
 
 export default Banner;
-'
