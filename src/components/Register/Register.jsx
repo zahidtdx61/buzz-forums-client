@@ -115,7 +115,7 @@ const Register = () => {
       console.log("after update", user);
 
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
       // console.error('get error: ', error.code, error.message);
@@ -132,7 +132,7 @@ const Register = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -147,7 +147,7 @@ const Register = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
+      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
