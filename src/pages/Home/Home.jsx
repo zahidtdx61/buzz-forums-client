@@ -15,7 +15,7 @@ const Home = () => {
   const [search, setSearch] = useState(null);
   const [sorted, setSorted] = useState("createdAt");
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(5);
+  const [size] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const axios = useAxiosCommon();
   const { allAnnouncement, announcementLoading } = useAnnouncement();
@@ -32,7 +32,7 @@ const Home = () => {
   const { data: allPosts, isLoading: postsLoading } = useQuery({
     queryKey: ["posts", tag, search, sorted, page, size],
     queryFn: async () => {
-      console.log({ page, size });
+      // console.log({ page, size });
       const response = await axios.get(
         `/user/get-posts?sorted=${sorted}&tag=${tag}&search=${search}&page=${page}&size=${size}`
       );
@@ -69,7 +69,7 @@ const Home = () => {
         <title>Buzz Forums | Home</title>
       </Helmet>
       <div className="min-h-[calc(100vh-80px)] mx-auto w-full mt-12 p-2">
-        <Banner />
+        <Banner setSearch={setSearch} />
 
         <Tags
           tag={tag}
