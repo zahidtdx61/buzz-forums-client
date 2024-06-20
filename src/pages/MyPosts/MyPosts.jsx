@@ -17,9 +17,9 @@ const MyPosts = () => {
   const { user, isLoading: userLoading } = useAuth();
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["my-posts"],
+    queryKey: ["my-posts", user],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/user/get-posts?id=${user?.uid}`);
+      const response = await axiosSecure.get(`/user/my-posts`);
       const data = response.data;
       // console.log(data.data);
       return data.data;
