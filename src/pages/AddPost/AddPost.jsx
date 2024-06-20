@@ -128,7 +128,7 @@ const AddPost = () => {
           Welcome, <span className="font-lexend">{displayName || "User"}</span>
         </div>
         <h1 className="text-2xl">Add a new Post</h1>
-        <div className="size-30 rounded-full overflow-hidden mt-5">
+        <div className="h-[70px] w-[70px] rounded-full overflow-hidden mt-5">
           <img
             src={photoURL || ""}
             className="h-full w-full object-cover object-center"
