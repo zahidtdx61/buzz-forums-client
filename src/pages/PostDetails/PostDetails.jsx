@@ -2,6 +2,7 @@ import { Tooltip } from "@mui/joy";
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -61,6 +62,10 @@ const PostDetails = () => {
 
   return (
     <div className="w-[95%] max-w-screen-xl mx-auto my-8 min-h-svh">
+      <Helmet>
+        <title>Buzz Forums | Post Details</title>
+      </Helmet>
+
       <div className="flex flex-col md:flex-row md:justify-between md:items-center">
         <div>
           <Avatar src={post?.userId?.image} />
