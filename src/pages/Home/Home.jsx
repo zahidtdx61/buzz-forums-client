@@ -3,12 +3,14 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Announcements from "../../components/Announcements/Announcements";
 import Loader from "../../components/Loader/Loader";
+import PostSection from "../../components/PostSection/PostSection";
 import Tags from "../../components/Tags/Tags";
 import useAnnouncement from "../../hooks/useAnnouncement";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Home = () => {
   const [tag, setTag] = useState(null);
+  const [search, setSearch] = useState(null);
   const axios = useAxiosCommon();
   const { allAnnouncement, announcementLoading } = useAnnouncement();
 
@@ -17,6 +19,17 @@ const Home = () => {
     queryFn: async () => {
       const response = await axios.get("/user/tags");
       // console.log(response.data.data);
+      return response?.data?.data;
+    },
+  });
+
+  const { data: allPosts, isLoading: postsLoading } = useQuery({
+    queryKey: ["posts", tag, search],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/user/get-posts?sorted=vote&tag=${tag}&search=${search}`
+      );
+      console.log(response.data);
       return response?.data?.data;
     },
   });
@@ -45,7 +58,11 @@ const Home = () => {
           tagsLoading={tagsLoading}
         />
 
-        {allAnnouncement?.length && <Announcements announcements={allAnnouncement} />}
+        {allAnnouncement?.length && (
+          <Announcements announcements={allAnnouncement} />
+        )}
+
+        <PostSection allPosts={allPosts} isLoading={postsLoading} />
       </div>
     </>
   );
