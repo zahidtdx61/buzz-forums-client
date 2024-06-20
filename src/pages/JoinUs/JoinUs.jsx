@@ -7,10 +7,9 @@ import useAuth from "../../hooks/useAuth";
 
 const JoinUs = () => {
   const [tab, tabIndex] = useState(0);
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
   const navigation = useNavigation();
-  const { isLoading } = useAuth();
 
   if (navigation.state === "loading") return <Loader />;
   if (isLoading) return <Loader />;

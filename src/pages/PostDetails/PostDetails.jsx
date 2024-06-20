@@ -9,6 +9,7 @@ import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import Loader from "../../components/Loader/Loader";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import PostShareModal from "./PostShareModal";
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -18,6 +19,7 @@ const PostDetails = () => {
   const [openComment, setOpenComment] = useState(false);
   const { user, isLoading: userLoading } = useAuth();
   const [voteLoading, setVoteLoading] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   const { data: post, isLoading: postLoading } = useQuery({
     queryKey: ["post", postId],
@@ -40,7 +42,7 @@ const PostDetails = () => {
   const handleVote = async (vote) => {
     try {
       setVoteLoading(true);
-       await axiosSecure.post(`/user/vote/${postId}`, { vote });
+      await axiosSecure.post(`/user/vote/${postId}`, { vote });
       // console.log(response.data);
       setVoteLoading(false);
       toast.success(`Post ${vote} voted successfully`);
@@ -54,6 +56,8 @@ const PostDetails = () => {
   };
 
   // console.log(post);
+
+  const shareLink = `https://buzz-forums.vercel.app/post/${postId}`;
 
   return (
     <div className="w-[95%] max-w-screen-xl mx-auto my-8 min-h-svh">
@@ -96,7 +100,10 @@ const PostDetails = () => {
       {/* share, comment, upVote, downVote */}
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="flex items-center">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-8">
+          <button
+            onClick={() => setShareModalOpen(true)}
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-8"
+          >
             Share
           </button>
           <button
@@ -135,6 +142,13 @@ const PostDetails = () => {
         open={openComment}
         setOpen={setOpenComment}
         postId={postId}
+      />
+
+      {/* share modal */}
+      <PostShareModal
+        open={shareModalOpen}
+        setOpen={setShareModalOpen}
+        shareUrl={shareLink}
       />
     </div>
   );
