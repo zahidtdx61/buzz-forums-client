@@ -20,8 +20,8 @@ const PostCard = ({ post }) => {
         <div className="flex gap-2 items-center">
           <div className="size-8">
             <img
-              src={post.user.image}
-              alt={post.user.name}
+              src={post?.user?.image}
+              alt={post?.user?.name}
               className="rounded-full"
             />
           </div>

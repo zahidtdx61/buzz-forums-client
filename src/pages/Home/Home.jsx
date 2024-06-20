@@ -11,6 +11,9 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 const Home = () => {
   const [tag, setTag] = useState(null);
   const [search, setSearch] = useState(null);
+  const [sorted, setSorted] = useState("createdAt");
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(5);
   const axios = useAxiosCommon();
   const { allAnnouncement, announcementLoading } = useAnnouncement();
 
@@ -24,10 +27,10 @@ const Home = () => {
   });
 
   const { data: allPosts, isLoading: postsLoading } = useQuery({
-    queryKey: ["posts", tag, search],
+    queryKey: ["posts", tag, search, sorted],
     queryFn: async () => {
       const response = await axios.get(
-        `/user/get-posts?sorted=vote&tag=${tag}&search=${search}`
+        `/user/get-posts?sorted=${sorted}&tag=${tag}&search=${search}&page=${page}&size=${size}`
       );
       console.log(response.data);
       return response?.data?.data;
@@ -62,7 +65,11 @@ const Home = () => {
           <Announcements announcements={allAnnouncement} />
         )}
 
-        <PostSection allPosts={allPosts} isLoading={postsLoading} />
+        <PostSection
+          allPosts={allPosts}
+          isLoading={postsLoading}
+          setSorted={setSorted}
+        />
       </div>
     </>
   );
