@@ -124,7 +124,7 @@ const PostDetails = () => {
             <button
               disabled={voteLoading}
               onClick={() => handleVote("up")}
-              className="bg-blue-500 text-white px-4 py-2 rounded mt-8"
+              className="bg-blue-500 text-white px-4 py-2 rounded mt-8 disabled:cursor-not-allowed"
             >
               <BiUpvote />
             </button>
@@ -134,7 +134,7 @@ const PostDetails = () => {
             <button
               disabled={voteLoading}
               onClick={() => handleVote("down")}
-              className="bg-blue-500 text-white px-4 py-2 rounded mt-8 ml-4"
+              className="bg-blue-500 text-white px-4 py-2 rounded mt-8 ml-4 disabled:cursor-not-allowed"
             >
               <BiDownvote />
             </button>
