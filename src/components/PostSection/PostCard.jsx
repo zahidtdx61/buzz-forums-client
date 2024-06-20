@@ -21,7 +21,6 @@ const PostCard = ({ post }) => {
           <div className="size-8">
             <img
               src={post?.user?.image}
-              alt={post?.user?.name}
               className="rounded-full"
             />
           </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Announcements from "../../components/Announcements/Announcements";
 import Loader from "../../components/Loader/Loader";
+import PostPagination from "../../components/PostSection/PostPagination";
 import PostSection from "../../components/PostSection/PostSection";
 import Tags from "../../components/Tags/Tags";
 import useAnnouncement from "../../hooks/useAnnouncement";
@@ -14,6 +15,7 @@ const Home = () => {
   const [sorted, setSorted] = useState("createdAt");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
   const axios = useAxiosCommon();
   const { allAnnouncement, announcementLoading } = useAnnouncement();
 
@@ -27,17 +29,29 @@ const Home = () => {
   });
 
   const { data: allPosts, isLoading: postsLoading } = useQuery({
-    queryKey: ["posts", tag, search, sorted],
+    queryKey: ["posts", tag, search, sorted, page, size],
     queryFn: async () => {
+      console.log({page, size});
       const response = await axios.get(
         `/user/get-posts?sorted=${sorted}&tag=${tag}&search=${search}&page=${page}&size=${size}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       return response?.data?.data;
     },
   });
 
-  if (announcementLoading) {
+  const { isLoading: postsPaginationLoading } = useQuery({
+    queryKey: ["posts", tag, search, sorted],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/user/get-posts?sorted=${sorted}&tag=${tag}&search=${search}`
+      );
+      setTotalPages(Math.ceil(response?.data?.data.length / size));
+      return response?.data?.data;
+    },
+  });
+
+  if (announcementLoading || postsPaginationLoading) {
     return (
       <div>
         <Helmet>
@@ -70,6 +84,9 @@ const Home = () => {
           isLoading={postsLoading}
           setSorted={setSorted}
         />
+        <div className="max-w-screen-md mx-auto mb-8">
+          <PostPagination totalPages={totalPages} currPage={page} setPage={setPage} />
+        </div>
       </div>
     </>
   );
