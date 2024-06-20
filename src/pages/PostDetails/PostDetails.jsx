@@ -30,7 +30,15 @@ const PostDetails = () => {
     },
   });
 
-  if (postLoading || userLoading) return <Loader />;
+  if (postLoading || userLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Post Details</title>
+        </Helmet>
+        <Loader />
+      </>
+    );
 
   const handleModal = () => {
     if (!user) {

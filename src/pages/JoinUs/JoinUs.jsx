@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import Login from "../../components/Login/Login";
@@ -12,7 +13,15 @@ const JoinUs = () => {
   const navigation = useNavigation();
 
   if (navigation.state === "loading") return <Loader />;
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Join Us</title>
+        </Helmet>
+        <Loader />
+      </>
+    );
 
   if (user) {
     // toast.error("You are already signed in");
@@ -21,10 +30,13 @@ const JoinUs = () => {
 
   return (
     <section className="flex flex-col items-center justify-center font-mulish">
+      <Helmet>
+        <title>Buzz Forums | Join Us</title>
+      </Helmet>
       <div className="flex flex-col items-center justify-center w-full max-w-2xl p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
         <Link
           to={"/"}
-          className="text-2xl text-center font-medium font-mulish text-blue-600 text-2xl font-bold sm:text-3xl"
+          className="text-2xl text-center  font-mulish text-blue-600 font-bold sm:text-3xl"
         >
           Join Buzz Forums today and connect with a vibrant community!
         </Link>

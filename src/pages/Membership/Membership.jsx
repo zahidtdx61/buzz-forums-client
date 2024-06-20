@@ -1,6 +1,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+import { Helmet } from "react-helmet-async";
 import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
 import Loader from "../../components/Loader/Loader";
 import useRole from "../../hooks/useRole";
@@ -10,10 +11,21 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Membership = () => {
   const { role, isRoleLoading } = useRole();
-  if (isRoleLoading) return <Loader />;
+  if (isRoleLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Membership</title>
+        </Helmet>
+        <Loader />
+      </>
+    );
 
   return (
     <div className="text-center mt-4 mb-8">
+      <Helmet>
+        <title>Buzz Forums | Membership</title>
+      </Helmet>
       <div className="w-[95%] max-w-screen-sm mx-auto">
         <img
           src="https://i.ibb.co/9rC4F0b/5364326.jpg"
@@ -30,24 +42,27 @@ const Membership = () => {
           our lifetime membership.
         </p>
 
-        {
-          role?.badge === "gold" && (
-            <div className="mt-4">
-              <img
-                src="https://i.ibb.co/m5nn4xs/golden.png"
-                alt="gold-badge"
-                className="w-16 h-16 mx-auto"
-              />
-              <p className="text-lg font-semibold text-gold-500 mt-2">
-                You are already a Gold Member. But if you want to support us more, you can donate.
-              </p>
-            </div>
-          ) 
-        }
+        {role?.badge === "gold" && (
+          <div className="mt-4">
+            <img
+              src="https://i.ibb.co/m5nn4xs/golden.png"
+              alt="gold-badge"
+              className="w-16 h-16 mx-auto"
+            />
+            <p className="text-lg font-semibold text-gold-500 mt-2">
+              You are already a Gold Member. But if you want to support us more,
+              you can donate.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="mt-10 text-blue-400">
-        <p>{(role?.badge === "gold") ? "Please fill up necessary info in order to donate us." : "Please fill up necessary info to be a Gold Member."}</p>
+        <p>
+          {role?.badge === "gold"
+            ? "Please fill up necessary info in order to donate us."
+            : "Please fill up necessary info to be a Gold Member."}
+        </p>
         <Elements stripe={stripePromise}>
           <CheckoutForm />
         </Elements>

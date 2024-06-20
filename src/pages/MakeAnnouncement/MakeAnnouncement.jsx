@@ -23,7 +23,15 @@ const MakeAnnouncement = () => {
     }
   };
 
-  if (userLoading) return <LoadContent />;
+  if (userLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Make Announcement</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
 
   const { displayName, photoURL } = user || {};
 
@@ -48,7 +56,10 @@ const MakeAnnouncement = () => {
         </div>
       </div>
 
-      <form className="space-y-5 mb-8 mx-auto" onSubmit={handleSubmit(handleFormData)}>
+      <form
+        className="space-y-5 mb-8 mx-auto"
+        onSubmit={handleSubmit(handleFormData)}
+      >
         <div>
           <label className="font-medium">Announcement Title</label>
           <input

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import CommentContent from "../../components/CommentContent/CommentContent";
 import LoadContent from "../../components/Loader/LoadContent";
@@ -18,11 +19,23 @@ const CommentsList = () => {
     },
   });
 
-  if (isLoading) return <LoadContent />;
+  if (isLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Comments List</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
   console.log(data);
 
   return (
     <div className="w-[95%] mx-auto">
+      <Helmet>
+        <title>Buzz Forums | Comments List</title>
+      </Helmet>
+
       <h1 className="text-2xl font-bold text-center mt-8">
         All Comments on this Post.
       </h1>

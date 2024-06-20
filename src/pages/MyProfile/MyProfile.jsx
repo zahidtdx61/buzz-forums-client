@@ -29,12 +29,19 @@ const MyProfile = () => {
   const { posts, isLoading: postLoading } = usePostCounter();
 
   if (isLoading || userLoading || postLoading || isRoleLoading)
-    return <LoadContent />;
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | My Profile</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
 
   const { displayName, email, photoURL } = user || {};
   const { badge } = userData || {};
 
-  console.log(role);
+  // console.log(role);
 
   const goldBadge = "https://i.ibb.co/m5nn4xs/golden.png";
   const bronzeBadge = "https://i.ibb.co/yVJ7jpX/bronze.png";
@@ -126,13 +133,11 @@ const MyProfile = () => {
               </div>
             ))}
 
-            {
-              posts.length === 0 && (
-                <div className="text-xl text-center text-zinc-500">
-                  No posts found. Start posting now.
-                </div>
-              )
-            }
+            {posts.length === 0 && (
+              <div className="text-xl text-center text-zinc-500">
+                No posts found. Start posting now.
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -42,10 +43,22 @@ const ReportedComments = () => {
     }
   };
 
-  if (isLoading || mutationLoading) return <LoadContent />;
+  if (isLoading || mutationLoading)
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Reported Comments</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
 
   return (
     <div className="mb-8">
+      <Helmet>
+        <title>Buzz Forums | Reported Comments</title>
+      </Helmet>
+
       <div className="w-[95%] mx-auto">
         <h1 className="text-2xl font-bold text-center mt-8">
           All Reported Comments.

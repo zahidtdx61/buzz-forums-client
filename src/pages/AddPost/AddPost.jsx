@@ -102,7 +102,14 @@ const AddPost = () => {
   };
 
   if (isLoading || postLoading || isRoleLoading || tagsLoading)
-    return <LoadContent />;
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Add Post</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
 
   if (role?.badge === "bronze" && posts?.length >= 5) {
     toast.error(
@@ -127,17 +134,18 @@ const AddPost = () => {
             className="h-full w-full object-cover object-center"
           />
         </div>
-        
-        {
-          (role?.badge === "bronze" && posts?.length >= 5) &&(
-            <div className="mt-10 max-w-screen-lg mx-auto flex flex-col justify-center">
-              <p className="text-xl text-red-500 text-center">You have reached to maximum post capacity as Bronze user of 5 posts. If you want to post more feel free buy our Gold Membership </p>
-              <button className="mt-8 px-5 py-1 rounded-md bg-red-600 text-white w-fit block mx-auto">
-                <Link to="/membership">Be a Gold Member</Link>
-              </button>
-            </div>
-          )
-        }
+
+        {role?.badge === "bronze" && posts?.length >= 5 && (
+          <div className="mt-10 max-w-screen-lg mx-auto flex flex-col justify-center">
+            <p className="text-xl text-red-500 text-center">
+              You have reached to maximum post capacity as Bronze user of 5
+              posts. If you want to post more feel free buy our Gold Membership{" "}
+            </p>
+            <button className="mt-8 px-5 py-1 rounded-md bg-red-600 text-white w-fit block mx-auto">
+              <Link to="/membership">Be a Gold Member</Link>
+            </button>
+          </div>
+        )}
 
         <div className="p-4">
           <div className="mt-8 text-base font-mulish ">

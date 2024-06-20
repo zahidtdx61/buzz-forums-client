@@ -27,7 +27,14 @@ const MyPosts = () => {
   });
 
   if (isLoading || userLoading) {
-    return <LoadContent />;
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | My Posts</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
   }
 
   if (isError) {

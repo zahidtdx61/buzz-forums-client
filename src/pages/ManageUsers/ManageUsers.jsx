@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import LoadContent from "../../components/Loader/LoadContent";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -41,11 +42,21 @@ const ManageUsers = () => {
   };
 
   if (allUsersLoading || isRoleLoading || mutationLoading) {
-    return <LoadContent />;
+    return (
+      <>
+        <Helmet>
+          <title>Buzz Forums | Manage Users</title>
+        </Helmet>
+        <LoadContent />
+      </>
+    );
   }
 
   return (
     <div className="w-[95%] lg:max-w-screen-lg mx-auto mb-8">
+      <Helmet>
+        <title>Buzz Forums | Manage Users</title>
+      </Helmet>
       <div className="mt-8">
         <div className="text-xl font-mulish text-center font-semibold mb-4">
           Manage Users
