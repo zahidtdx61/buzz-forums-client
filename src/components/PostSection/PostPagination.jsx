@@ -25,7 +25,7 @@ const PostPagination = ({ totalPages, setPage, currPage }) => {
       ))}
       <button
       onClick={() => setPage(currPage+1)}
-        className="disabled:text-zinc-100 disabled:cursor-not-allowed px-2 py-1 rounded bg-zinc-200"
+        className="disabled:text-slate-500 disabled:cursor-not-allowed px-2 py-1 rounded bg-zinc-200"
         disabled={currPage === totalPages}
       >
         Next
