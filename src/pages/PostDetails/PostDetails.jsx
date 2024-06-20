@@ -1,6 +1,9 @@
+import { Tooltip } from "@mui/joy";
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { BiDownvote, BiUpvote } from "react-icons/bi";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AddCommentModal from "../../components/AddCommentModal/AddCommentModal";
 import Loader from "../../components/Loader/Loader";
@@ -14,6 +17,7 @@ const PostDetails = () => {
   const axiosSecure = useAxiosSecure();
   const [openComment, setOpenComment] = useState(false);
   const { user, isLoading: userLoading } = useAuth();
+  const [voteLoading, setVoteLoading] = useState(false);
 
   const { data: post, isLoading: postLoading } = useQuery({
     queryKey: ["post", postId],
@@ -33,7 +37,23 @@ const PostDetails = () => {
     }
   };
 
-  console.log(post);
+  const handleVote = async (vote) => {
+    try {
+      setVoteLoading(true);
+       await axiosSecure.post(`/user/vote/${postId}`, { vote });
+      // console.log(response.data);
+      setVoteLoading(false);
+      toast.success(`Post ${vote} voted successfully`);
+    } catch (error) {
+      console.log(error.message);
+      setVoteLoading(false);
+      toast.error("Something went wrong");
+    } finally {
+      setVoteLoading(false);
+    }
+  };
+
+  // console.log(post);
 
   return (
     <div className="w-[95%] max-w-screen-xl mx-auto my-8 min-h-svh">
@@ -83,17 +103,30 @@ const PostDetails = () => {
             onClick={handleModal}
             className="bg-blue-500 text-white px-4 py-2 rounded mt-8 ml-4"
           >
-            Comment
+            Add your Comment
           </button>
         </div>
 
         <div className="flex items-center">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-8">
-            UpVote
-          </button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-8 ml-4">
-            DownVote
-          </button>
+          <Tooltip title="Upvote">
+            <button
+              disabled={voteLoading}
+              onClick={() => handleVote("up")}
+              className="bg-blue-500 text-white px-4 py-2 rounded mt-8"
+            >
+              <BiUpvote />
+            </button>
+          </Tooltip>
+
+          <Tooltip title="Downvote">
+            <button
+              disabled={voteLoading}
+              onClick={() => handleVote("down")}
+              className="bg-blue-500 text-white px-4 py-2 rounded mt-8 ml-4"
+            >
+              <BiDownvote />
+            </button>
+          </Tooltip>
         </div>
       </div>
 
