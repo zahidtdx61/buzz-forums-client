@@ -1,16 +1,18 @@
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import useAnnouncement from "../../hooks/useAnnouncement";
 import useAuth from "../../hooks/useAuth";
 import UserInfo from "../UserInfo/UserInfo";
 import NavbarSmDevice from "./NavbarSmDevice";
 
 const Navbar = () => {
   const { user } = useAuth();
+  const { allAnnouncement } = useAnnouncement();
 
   const routes = [
     { name: "Home", path: "/", type: "public" },
     { name: "Membership Page", path: "/membership", type: "public" },
-    { name: "Notifications", path: "/notification", type: "private" },
+    { name: "Announcements", path: "/announcements", type: "private" },
   ];
 
   const navStyle = (isActive) => {
@@ -54,9 +56,14 @@ const Navbar = () => {
                   to={route.path}
                   className={({ isActive }) => navStyle(isActive)}
                 >
-                  {route.name === "Notifications" ? (
-                    <button>
+                  {route.name === "Announcements" ? (
+                    <button className="flex">
                       <IoIosNotificationsOutline className="text-2xl" />
+                      {allAnnouncement && allAnnouncement.length > 0 && (
+                        <span className="text-xs bg-red-500 text-white rounded-full px-2 py-1">
+                          {allAnnouncement.length}
+                        </span>
+                      )}
                     </button>
                   ) : (
                     route.name

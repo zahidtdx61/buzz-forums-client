@@ -6,9 +6,11 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { LuMenu } from "react-icons/lu";
 import { NavLink, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAnnouncement from "../../hooks/useAnnouncement";
 
 const NavbarSmDevice = ({ routes, navStyle }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { allAnnouncement } = useAnnouncement();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -59,9 +61,14 @@ const NavbarSmDevice = ({ routes, navStyle }) => {
                   to={route.path}
                   className={({ isActive }) => navStyle(isActive)}
                 >
-                  {route.name === "Notifications" ? (
-                    <button>
+                  {route.name === "Announcements" ? (
+                    <button className="flex">
                       <IoIosNotificationsOutline className="text-2xl" />
+                      {allAnnouncement && allAnnouncement.length > 0 && (
+                        <span className="text-xs bg-red-500 text-white rounded-full px-2 py-1">
+                          {allAnnouncement.length}
+                        </span>
+                      )}
                     </button>
                   ) : (
                     <Typography>{route.name}</Typography>
