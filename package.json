@@ -36,7 +36,8 @@
     "react-tabs": "^6.0.2",
     "react-tooltip": "^5.26.4",
     "recharts": "^2.12.7",
-    "sort-by": "^0.0.2"
+    "sort-by": "^0.0.2",
+    "swiper": "^11.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
