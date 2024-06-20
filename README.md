@@ -1,69 +1,122 @@
-# Base React Project Template
+# Buzz Forums
 
-This is a base template for starting new React projects. It comes pre-configured with various packages and tools to streamline the development process.
+Welcome to [Buzz Forums](https://buzz-forums.vercel.app), the ultimate destination for engaging discussions and vibrant communities. Connect, share, and explore with users from around the world.
+
+## Live Preview
+
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fbuzz-forums.vercel.app%2F)](https://buzz-forums.vercel.app/)
+
+You can visit our live site at [Buzz Forums](https://buzz-forums.vercel.app/).
 
 ## Features
 
-- **React**: A JavaScript library for building user interfaces.
-- **React DOM**: Provides DOM-specific methods that can be used at the top level of a web app to enable React components to be rendered into the DOM.
-- **React Helmet Async**: A package for managing document head tags in React.
-- **React Router DOM**: Declarative routing for React.
-- **React Prop-Types**: A library for typechecking React props and similar objects.
+### User Features
 
-## Development Dependencies
+- **Post Creation:** Users can create new posts on various topics.
+- **Commenting:** Engage in discussions by commenting on posts.
+- **Upvote/Downvote:** Express your opinion by upvoting or downvoting posts and comments.
+- **Reporting:** Report inappropriate comments to keep the community safe.
+- **Personal Post List:** View a list of all your posts in one place.
+- **Gold Membership:** Purchase a gold membership subscription to unlock special benefits.
 
-- **PostCSS**: A tool for transforming styles with JavaScript plugins.
-- **Tailwind CSS**: A utility-first CSS framework for building custom designs quickly.
-- **Vite**: A fast, opinionated web dev build tool that serves your code via native ES Modules.
+### Admin Features
+
+- **User Management:** Admins can manage users, including making users admins and handling reported comments.
+- **Delete Comments:** Admins can delete comments that have been reported.
+- **Announcements:** Admins can make announcements to the community.
+- **Site Statistics:** Admins can view site statistics as graphs.
 
 ## Installation
 
-You can install the project in two ways:
+To run the website locally, follow these steps:
 
-### 1. Cloning the Repository
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/programming-hero-web-course1/b9a12-client-side-zahidtdx61
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd b9a12-client-side-zahidtdx61
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Make an .env file and add these credentials:
 
-Clone the repository to your local machine using the following command:
+   ```sh
+   VITE_apiKey=<get_this_from_firebase>
+   VITE_authDomain=<get_this_from_firebase>
+   VITE_projectId=<get_this_from_firebase>
+   VITE_storageBucket=<get_this_from_firebase>
+   VITE_messagingSenderId=<get_this_from_firebase>
+   VITE_appId=<get_this_from_firebase>
+   VITE_IMGBB_API_KEY=<get_this_from_imgbb>
+   VITE_STRIPE_PUBLISHABLE_KEY=<get_this_from_stripe>
+   VITE_API_URL=<add_you_backend_api_address>
+   ```
 
-```bash
-git clone https://github.com/zahidtdx61/Base-React-Project-Template.git
-```
-
-Then, navigate to the project directory and install dependencies:
-
-```bash
-cd Base-React-Project-Template
-npm install
-```
-
-### 2. Downloading as a .zip File
-
-1. Download the project folder as a .zip file from the repository.
-2. Extract the contents of the .zip file to your desired location on your local machine.
-3. Open a terminal and navigate to the extracted folder (Base-React-Project-Template).
-4. Install project dependencies:
-
-```bash
-npm install
-```
+5. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
 ## Usage
 
-After installing dependencies, you can start the development server:
+Visit [Buzz Forums](https://buzz-forums.vercel.app) to start exploring. Register for an account or log in to access all features.
 
-```bash
-npm run dev
-```
+### User Guide
 
-## Deployment
+- **Creating a Post:** Click on the "New Post" button, fill in the required details, and submit your post.
+- **Commenting:** Navigate to a post you’re interested in, and add your comment in the comment section.
+- **Upvoting/Downvoting:** Use the upvote and downvote buttons to express your views on posts and comments.
+- **Reporting Comments:** Click the report button on any comment you find inappropriate.
+- **Gold Membership:** Visit the subscription page to purchase a gold membership and enjoy exclusive benefits.
+- **Viewing Your Posts:** Access your profile and view the list of all your posts.
 
-This project includes configuration for deployment on various platforms:
+### Admin Guide
 
-- **Vercel**: For deployment on Vercel, the necessary configuration can be found in `vercel.json` file in the root folder.
-- **Netlify**: For deployment on Netlify, the necessary configuration can be found in `_redirects` file located in the `public` folder.
-- **Surge**: For deployment on Surge, update the domain name in the `CNAME` file located in the `public` folder.
+- **Managing Users:** Access the admin panel to manage user roles and permissions.
+- **Handling Reported Comments:** Review and delete comments that have been reported by users.
+- **Making Announcements:** Use the announcement feature to communicate important information to the community.
+- **Viewing Site Statistics:** Navigate to the statistics section in the admin panel to view site stats as graphs.
 
-Make sure to adjust these configurations according to your deployment settings.
+## Technologies Used
 
-## Contributing
+#### Frontend
 
-Contributions are welcome! If you have ideas for improvements or new features, feel free to open an issue or submit a pull request.
+- **React**: Frontend development framework for building user interfaces.
+- **React Router**: For declarative routing within the React application.
+- **React DOM**: Enables rendering of React components in the DOM.
+- **Material-UI (MUI)**: React UI framework for implementing Material Design components.
+- **@mui/joy**: MUI's Joy component library.
+- **Firebase**: Backend-as-a-Service platform for hosting and managing application data and authentication.
+- **Axios**: HTTP client for making API requests.
+- **Tankstack Query**: Library for managing state and data fetching in React applications.
+
+#### NPM Packages Used
+
+- **`@mui/material`**: Material-UI's core components.
+- **`@mui/joy`**: MUI's Joy component library.
+- **`react-router-dom`**: Library for declarative routing within the React application.
+- **`react-hook-form`**: Library for building forms in React with easy form validation.
+- **`@tanstack/react-query`**: Library for managing state and data fetching in React applications.
+- **`axios`**: HTTP client for making API requests.
+- **`swiper`**: Modern touch slider library for building interactive carousels and sliders.
+- **`react-datepicker`**: Customizable date picker component for React.
+- **`useAsyncEffect`**: Custom hook for handling asynchronous effects in React components.
+- **`lottie-react`**: Used for rendering Lottie animations in React components.
+- **`react-icons`**: Library for popular icon packs as React components.
+- **`react-helmet-async`**: Library for managing document head contents in React applications.
+- **`react-hot-toast`**: Toast notifications library for React applications.
+- **`react-tooltip`**: Library for creating tooltips in React components.
+- **`prop-types`**: Runtime type checking for React props and similar objects.
+- **`eslint`**: Pluggable JavaScript linter.
+- **`tailwindcss`**: Utility-first CSS framework.
+- **`postcss`**: Tool for transforming CSS with JavaScript.
+- **`autoprefixer`**: PostCSS plugin to parse CSS and add vendor prefixes.
+- **`vite`**: Next generation frontend tooling.
+
+## Contribution
+
+We welcome contributions from the community to enhance and improve Buzz Forums.
