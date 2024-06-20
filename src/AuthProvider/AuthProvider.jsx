@@ -1,6 +1,6 @@
 import {
-  GithubAuthProvider,
   GoogleAuthProvider,
+  TwitterAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -34,10 +34,10 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const githubProvider = new GithubAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
   const signInGithub = () => {
     setIsLoading(true);
-    return signInWithPopup(auth, githubProvider);
+    return signInWithPopup(auth, twitterProvider);
   };
 
   const updateUser = (name, imageUrl) => {

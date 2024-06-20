@@ -74,9 +74,15 @@ const Login = ({ tabIndex }) => {
       toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
     } catch (error) {
+      // console.log(error.code);
       setIsLoading(false);
       setUser(null);
-      toast.error("Github sign in failed !!!");
+      if (error.code === "auth/account-exists-with-different-credential"){
+        toast.error("Email already in use with other provider !!!");
+        return;
+      }
+
+      toast.error("Twitter sign in failed !!!");
     }
   };
 
