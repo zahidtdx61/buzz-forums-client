@@ -16,7 +16,7 @@ const MyPosts = () => {
   const [postId, setPostId] = useState("");
   const { user, isLoading: userLoading } = useAuth();
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["my-posts", user],
     queryFn: async () => {
       const response = await axiosSecure.get(`/user/my-posts`);
@@ -35,14 +35,6 @@ const MyPosts = () => {
         <LoadContent />
       </>
     );
-  }
-
-  if (isError) {
-    return <div>Error fetching posts</div>;
-  }
-
-  if (data.length === 0) {
-    return <div>No posts found</div>;
   }
 
   return (
@@ -64,7 +56,7 @@ const MyPosts = () => {
         {data?.length === 0 ? (
           <tbody>
             <tr>
-              <td colSpan={6} className="text-center text-xl font-bold">
+              <td colSpan={6} className="text-center text-xl font-bold p-4">
                 No Post Found
               </td>
             </tr>
