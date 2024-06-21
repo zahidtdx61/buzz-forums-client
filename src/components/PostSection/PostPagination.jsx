@@ -4,7 +4,7 @@ const PostPagination = ({ totalPages, setPage, currPage }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   // console.log(pages);
   return (
-    <div className="mx-auto w-fit flex gap-1">
+    <div className="mx-auto w-fit flex flex-wrap justify-center gap-1">
       <button
         onClick={() => setPage(currPage-1)}
         disabled={currPage === 1}
