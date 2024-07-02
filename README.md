@@ -39,11 +39,11 @@ To run the website locally, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/programming-hero-web-course1/b9a12-client-side-zahidtdx61
+   git clone https://github.com/zahidtdx61/buzz-forums-client.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd b9a12-client-side-zahidtdx61
+   cd buzz-forums-client
    ```
 3. Install dependencies:
    ```sh
