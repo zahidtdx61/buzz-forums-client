@@ -55,7 +55,7 @@ To run the website locally, follow these steps:
    ```
 4. Make an .env file and add these credentials:
 
-   ```sh
+   ```env
    VITE_apiKey=<get_this_from_firebase>
    VITE_authDomain=<get_this_from_firebase>
    VITE_projectId=<get_this_from_firebase>
