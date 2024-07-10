@@ -11,13 +11,13 @@ You can visit our live site at [Buzz Forums](https://buzz-forums.vercel.app/).
 ## Sample Credentials
 
 ```
-Admin Email = admin@admin.admin
-Admin Password = Admin123
+Email = user@user.user
+Password = User123
 ```
 
 ## Backend Repo
- - [Backend](https://github.com/zahidtdx61/burr-forums-server)
 
+- [Backend](https://github.com/zahidtdx61/burr-forums-server)
 
 ## Features
 
