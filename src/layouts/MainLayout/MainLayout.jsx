@@ -3,6 +3,7 @@ import Footer from "../../components/Footer/Footer";
 import Loader from "../../components/Loader/Loader";
 import Navbar from "../../components/Navbar/Navbar";
 import useAuth from "../../hooks/useAuth";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const MainLayout = () => {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ const MainLayout = () => {
         <Outlet />
       </div>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
