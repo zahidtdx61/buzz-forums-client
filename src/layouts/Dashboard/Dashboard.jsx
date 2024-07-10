@@ -4,6 +4,7 @@ import AdminSidebar from "../../components/Sidebar/AdminSidebar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const Dashboard = () => {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ const Dashboard = () => {
       <p className="text-center text-gray-400 px-2 lg:hidden mb-4">
         &copy; 2024 Buzz Forums. All rights reserved.
       </p>
+      <ScrollToTop />
     </div>
   );
 };
