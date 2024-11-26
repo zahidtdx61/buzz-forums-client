@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const Login = ({ tabIndex }) => {
+const SignIn = ({ tabIndex }) => {
   const { register, handleSubmit } = useForm();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
@@ -41,7 +40,7 @@ const Login = ({ tabIndex }) => {
     try {
       const result = await signInEmail(email, password);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(result.user);
     } catch (error) {
       setIsLoading(false);
@@ -56,7 +55,7 @@ const Login = ({ tabIndex }) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -71,13 +70,13 @@ const Login = ({ tabIndex }) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       // console.log(error.code);
       setIsLoading(false);
       setUser(null);
-      if (error.code === "auth/account-exists-with-different-credential"){
+      if (error.code === "auth/account-exists-with-different-credential") {
         toast.error("Email already in use with other provider !!!");
         return;
       }
@@ -88,21 +87,17 @@ const Login = ({ tabIndex }) => {
 
   return (
     <>
-      <Helmet>
-        <title>Buzz Forums | Sign In</title>
-      </Helmet>
-
       <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-start mt-4 px-4">
         <div className="max-w-sm w-full text-gray-600 space-y-5">
           <div className="text-center pb-8">
             <div className="mt-5">
-              <h3 className="text-blue-600 text-2xl font-bold sm:text-3xl">
-                Log in to your account
+              <h3 className="text-primary-teal font-bold sm:text-3xl">
+                Sign in to your account
               </h3>
             </div>
           </div>
 
-          {/* login form */}
+          {/* SignIn form */}
           <form
             onSubmit={handleSubmit(handleSignIn)}
             className="space-y-5 mx-auto"
@@ -114,6 +109,7 @@ const Login = ({ tabIndex }) => {
                 required
                 type="email"
                 placeholder="Enter your email"
+                defaultValue={"user@user.user"}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />
             </div>
@@ -168,6 +164,7 @@ const Login = ({ tabIndex }) => {
                   required
                   type={isPasswordHidden ? "password" : "text"}
                   placeholder="Enter your password"
+                  defaultValue={"User123"}
                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                 />
               </div>
@@ -181,7 +178,7 @@ const Login = ({ tabIndex }) => {
                 />
                 <label
                   htmlFor="remember-me-checkbox"
-                  className="relative flex w-5 h-5 bg-zinc-200 peer-checked:bg-indigo-600 rounded-md border ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
+                  className="relative flex w-5 h-5 bg-zinc-200 peer-checked:bg-primary-teal rounded-md border ring-offset-2 ring-primary-teal duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
                 ></label>
                 <span>Remember me</span>
               </div>
@@ -195,13 +192,13 @@ const Login = ({ tabIndex }) => {
 
             <input
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-blue-600 hover:bg-blue-500 active:bg-blue-600 rounded-lg duration-150 hover:cursor-pointer"
+              className="w-full px-4 py-2 text-white font-medium bg-primary-teal  hover:bg-primary-green active:bg-primary-teal rounded-lg duration-150 hover:cursor-pointer"
               value="Log In"
             />
           </form>
 
-          {/* social login */}
-          {/* google login */}
+          {/* social SignIn */}
+          {/* google SignIn */}
           <button
             onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
@@ -239,7 +236,7 @@ const Login = ({ tabIndex }) => {
             Continue with Google
           </button>
 
-          {/* github login */}
+          {/* github SignIn */}
           <button
             onClick={handleGithubSignIn}
             className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
@@ -281,8 +278,8 @@ const Login = ({ tabIndex }) => {
   );
 };
 
-Login.propTypes = {
+SignIn.propTypes = {
   tabIndex: PropTypes.func,
 };
 
-export default Login;
+export default SignIn;
